@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "344880949076",
+    "firebase_url": "https://house-sharing-ff83f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "house-sharing-ff83f",
+    "storage_bucket": "house-sharing-ff83f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344880949076:android:40e03b6f39828eb727cac1",
+        "android_client_info": {
+          "package_name": "com.example.housesharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344880949076-q3oag104o896ra7q2lhqj4t16gma3ou7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO_A6-YXAIgtIDZ-dlVPl-RrfJUR4vSFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344880949076-q3oag104o896ra7q2lhqj4t16gma3ou7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

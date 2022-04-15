@@ -19,4 +19,8 @@ class LoginRegisterViewModel(application: Application) : AndroidViewModel(applic
     fun register(email: String, password: String){
         appRepository.register(email, password)
     }
+
+    fun login(email: String, password: String){
+        appRepository.login(email, password)
+    }
 }

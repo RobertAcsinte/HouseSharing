@@ -42,5 +42,13 @@
     <fragment
         android:id="@+id/loginRegisterFragment"
         android:name="com.example.housesharing.views.LoginRegisterFragment"
-        android:label="LoginRegisterFragment" />
+        android:label="LoginRegisterFragment" >
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_loggedInFragment"
+            app:destination="@id/loggedInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loggedInFragment"
+        android:name="com.example.housesharing.views.LoggedInFragment"
+        android:label="LoggedInFragment" />
 </navigation>

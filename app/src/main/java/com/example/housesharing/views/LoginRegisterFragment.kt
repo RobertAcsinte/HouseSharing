@@ -9,13 +9,15 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentLoginRegisterBinding
 import com.example.housesharing.viewmodel.LoginRegisterViewModel
 
 
 class LoginRegisterFragment : Fragment() {
-
 
     private lateinit var loginRegisterViewModel: LoginRegisterViewModel
 
@@ -41,11 +43,12 @@ class LoginRegisterFragment : Fragment() {
         loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
         loginRegisterViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
-                Toast.makeText(context, "User Created", Toast.LENGTH_SHORT).show()
+                view?.findNavController()?.navigate(R.id.action_loginRegisterFragment_to_loggedInFragment)
             }
         })
 
         registerButton()
+        loginButton()
         return binding.root
     }
 
@@ -56,6 +59,17 @@ class LoginRegisterFragment : Fragment() {
 
             if(email.isNotEmpty() && password.isNotEmpty()){
                 loginRegisterViewModel.register(email, password)
+            }
+        }
+    }
+
+    private fun loginButton(){
+        binding.buttonLogin.setOnClickListener {
+            var email: String = binding.editTextTextEmailAddress.text.toString()
+            var password: String = binding.editTextTextPassword.text.toString()
+
+            if(email.isNotEmpty() && password.isNotEmpty()){
+                loginRegisterViewModel.login(email, password)
             }
         }
     }

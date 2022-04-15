@@ -35,6 +35,7 @@ class LoginRegisterFragment : Fragment() {
             false
         )
 
+        //Go to LoggedInFragment if the user is already logged in
         loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
         loginRegisterViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {

@@ -17,6 +17,17 @@ class AppRepository(application: Application) {
     val userMutableLiveData: LiveData<FirebaseUser>
         get() = _userMutableLiveData
 
+    private val _loggedOutMutableLiveData = MutableLiveData<Boolean>()
+    val loggedOutMutableLiveData: LiveData<Boolean>
+        get() = _loggedOutMutableLiveData
+
+    init {
+        if(firebaseAuth.currentUser != null){
+            _userMutableLiveData.value = firebaseAuth.currentUser
+            _loggedOutMutableLiveData.value = false
+        }
+    }
+
     fun register(email: String, password: String){
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(application.mainExecutor) { task ->
@@ -24,13 +35,11 @@ class AppRepository(application: Application) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     _userMutableLiveData.value = firebaseAuth.currentUser
-                    //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(application, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
                 }
             }
     }
@@ -42,14 +51,17 @@ class AppRepository(application: Application) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     _userMutableLiveData.value = firebaseAuth.currentUser
-                    //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(application, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
                 }
             }
+    }
+
+    fun logOut(){
+        firebaseAuth.signOut()
+        _loggedOutMutableLiveData.value = true
     }
 }

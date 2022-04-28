@@ -1,4 +1,4 @@
-package com.example.housesharing.views
+package com.example.housesharing.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentAccountBinding
-import com.example.housesharing.databinding.FragmentLoggedInBinding
-import com.example.housesharing.viewmodel.AccountViewModel
-import com.example.housesharing.viewmodel.LoggedInViewModel
+import com.example.housesharing.viewModel.AccountViewModel
 
 
 class AccountFragment : Fragment() {
@@ -42,9 +40,9 @@ class AccountFragment : Fragment() {
         })
 
         //if user is logged out, go to register/login fragment
-        accountViewModel.loggedOutMutableLiveData.observe(viewLifecycleOwner, Observer { loggedOut ->
-            if (loggedOut ) {
-                view?.findNavController()?.navigate(R.id.action_accountFragment_to_loginRegisterFragment)
+        accountViewModel.loggedOutMutableLiveData.observe(viewLifecycleOwner, Observer { logged ->
+            if (logged) {
+                view?.findNavController()?.navigate(R.id.action_accountFragment_to_loginFragment)
             }
         })
 

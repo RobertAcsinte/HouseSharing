@@ -7,50 +7,86 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.LoginRegisterFragment">
+        tools:context=".view.LoginFragment">
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
-            android:layout_width="wrap_content"
+            android:id="@+id/editTextTextEmailAddressLogin"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
-            android:layout_width="wrap_content"
+            android:id="@+id/editTextTextPasswordLogin"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressLogin"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/button_login"
-            android:layout_width="wrap_content"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="LOGIN"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/log_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordLogin"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <Button
             android:id="@+id/button_register"
+            style="@style/ButtonPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="REGISTER"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="#00FFFFFF"
+            android:text="@string/you_don_t_have_an_account_register_now"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:text="@string/log_in"
+            android:textAppearance="@style/TitleBoldText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

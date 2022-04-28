@@ -7,7 +7,7 @@
         android:id="@+id/LayoutLoggedIn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.LoggedInFragment">
+        tools:context=".view.LoggedInFragment">
 
         <TextView
             android:id="@+id/textViewEmail"

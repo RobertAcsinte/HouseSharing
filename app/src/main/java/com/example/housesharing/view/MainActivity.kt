@@ -1,4 +1,4 @@
-package com.example.housesharing.views
+package com.example.housesharing.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration
             .Builder(
                 R.id.loggedInFragment,
-                R.id.loginRegisterFragment
+                R.id.loginFragment
             )
             .build()
         val navHostFragment =

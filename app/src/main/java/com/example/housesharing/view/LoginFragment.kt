@@ -1,4 +1,4 @@
-package com.example.housesharing.views
+package com.example.housesharing.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,20 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentLoginRegisterBinding
-import com.example.housesharing.viewmodel.LoginRegisterViewModel
+import com.example.housesharing.viewModel.AccountViewModel
 
 
-class LoginRegisterFragment : Fragment() {
+class LoginFragment : Fragment() {
 
-    private lateinit var loginRegisterViewModel: LoginRegisterViewModel
+    private lateinit var accountViewModel: AccountViewModel
 
     private lateinit var binding: FragmentLoginRegisterBinding
 
@@ -34,12 +33,14 @@ class LoginRegisterFragment : Fragment() {
             container,
             false
         )
+        (activity as AppCompatActivity).supportActionBar?.hide()
+
 
         //Go to LoggedInFragment if the user is already logged in
-        loginRegisterViewModel = ViewModelProvider(this).get(LoginRegisterViewModel::class.java)
-        loginRegisterViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
+        accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
+        accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
-                view?.findNavController()?.navigate(R.id.action_loginRegisterFragment_to_loggedInFragment)
+                view?.findNavController()?.navigate(R.id.action_loginFragment_to_loggedInFragment)
             }
         })
 
@@ -50,22 +51,26 @@ class LoginRegisterFragment : Fragment() {
 
     private fun registerButton(){
         binding.buttonRegister.setOnClickListener {
-            var email: String = binding.editTextTextEmailAddress.text.toString()
-            var password: String = binding.editTextTextPassword.text.toString()
-
-            if(email.isNotEmpty() && password.isNotEmpty()){
-                loginRegisterViewModel.register(email, password)
-            }
+            view?.findNavController()?.navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
     private fun loginButton(){
         binding.buttonLogin.setOnClickListener {
-            var email: String = binding.editTextTextEmailAddress.text.toString()
-            var password: String = binding.editTextTextPassword.text.toString()
+            var email: String = binding.editTextTextEmailAddressLogin.text.toString()
+            var password: String = binding.editTextTextPasswordLogin.text.toString()
 
             if(email.isNotEmpty() && password.isNotEmpty()){
-                loginRegisterViewModel.login(email, password)
+                accountViewModel.login(email, password).observe(viewLifecycleOwner){
+                    if(it.exception != null){
+                        Toast.makeText(context, it.exception!!.message.toString(),
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            else{
+                Toast.makeText(context, "Please fill out all the fields!",
+                    Toast.LENGTH_LONG).show()
             }
         }
     }

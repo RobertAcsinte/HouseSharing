@@ -17,6 +17,11 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_noHouseFragment"
+            app:destination="@id/noHouseFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loggedInFragment"
@@ -42,4 +47,16 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/noHouseFragment"
+        android:name="com.example.housesharing.view.NoHouseFragment"
+        android:label="NoHouseFragment" >
+        <action
+            android:id="@+id/action_noHouseFragment_to_createHouseFragment"
+            app:destination="@id/createHouseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createHouseFragment"
+        android:name="com.example.housesharing.view.CreateHouseFragment"
+        android:label="CreateHouseFragment" />
 </navigation>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
-        style="@style/ButtonPrimary"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.RegisterFragment">
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
             android:text="@string/register"
-            android:textAppearance="@style/TitleBoldText"
+            android:textAppearance="@style/TitleBold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +24,13 @@
 
         <EditText
             android:id="@+id/editTextTextEmailAddressRegister"
+            style="@style/EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
@@ -38,16 +40,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRegister"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="" />
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/editTextTextFirstNameRegister"
+            style="@style/EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/first_name"
             android:inputType="textPersonName"
@@ -57,16 +60,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressRegister"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="" />
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/editTextTextLastNameRegister"
+            style="@style/EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/last_name"
             android:inputType="textPersonName"
@@ -76,16 +80,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextFirstNameRegister"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="" />
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/editTextTextPasswordRegister"
+            style="@style/EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -95,16 +100,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextLastNameRegister"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="" />
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/editTextTextPasswordRepeatRegister"
+            style="@style/EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/repeat_password"
             android:inputType="textPassword"
@@ -114,8 +120,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordRegister"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="" />
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/buttonRegister"

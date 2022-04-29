@@ -43,7 +43,7 @@ class LoggedInFragment : Fragment() {
             false
         )
 
-        (activity as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarLoggedIn)
 
         accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
         accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->

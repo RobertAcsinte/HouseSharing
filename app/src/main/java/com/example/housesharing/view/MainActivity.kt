@@ -13,17 +13,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Up Button everywhere excluding the ids of fragments (from nav_graph)
-        val appBarConfiguration = AppBarConfiguration
-            .Builder(
-                R.id.loggedInFragment,
-                R.id.loginFragment
-            )
-            .build()
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)
+//        //Up Button everywhere excluding the ids of fragments (from nav_graph)
+//        val appBarConfiguration = AppBarConfiguration
+//            .Builder(
+//                R.id.loggedInFragment,
+//                R.id.loginFragment
+//            )
+//            .build()
+//        val navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+//        val navController = navHostFragment.navController
+//        NavigationUI.setupActionBarWithNavController(this,navController, appBarConfiguration)
 
     }
 

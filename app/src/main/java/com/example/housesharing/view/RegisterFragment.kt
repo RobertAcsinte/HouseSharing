@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
                 if(password == repeatPassword){
                     accountViewModel.register(email, firstName, lastName, password).observe(viewLifecycleOwner){
                         if(it.exception == null){
-                            view?.findNavController()?.navigate(R.id.action_registerFragment_to_loggedInFragment)
+                            //view?.findNavController()?.navigate(R.id.action_registerFragment_to_loggedInFragment)
                         }
                         else{
                             Toast.makeText(context, it.exception!!.message.toString(),

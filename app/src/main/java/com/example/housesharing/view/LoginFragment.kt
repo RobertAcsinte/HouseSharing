@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
         accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
         accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
-                view?.findNavController()?.navigate(R.id.action_loginFragment_to_loggedInFragment)
+                view?.findNavController()?.navigate(R.id.action_loginFragment_to_loadFragment)
             }
         })
 

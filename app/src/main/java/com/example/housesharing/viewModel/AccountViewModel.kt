@@ -3,6 +3,7 @@ package com.example.housesharing.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.housesharing.model.AccountResponse
 import com.example.housesharing.repository.AccountsRepository
@@ -30,5 +31,13 @@ class AccountViewModel(private val repository: AccountsRepository = AccountsRepo
 
     fun logOut(){
         repository.logOut()
+    }
+
+    fun hasHouse(): MutableLiveData<Boolean>{
+        return repository.checkHouse()
+    }
+
+    fun accountData(): MutableLiveData<AccountResponse>{
+        return repository.accountData()
     }
 }

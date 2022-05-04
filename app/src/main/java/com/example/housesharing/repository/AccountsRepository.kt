@@ -10,16 +10,18 @@ import com.example.housesharing.model.Account
 import com.example.housesharing.model.AccountResponse
 import com.example.housesharing.model.Note
 import com.example.housesharing.model.NoteResponse
+import com.example.housesharing.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class AccountsRepository() {
+    private val rootRef: FirebaseDatabase = Firebase.database
+    private val accountRef: DatabaseReference = rootRef.getReference(Constants.ACCOUNT_REF)
+
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _userMutableLiveData = MutableLiveData<FirebaseUser>()
@@ -33,6 +35,7 @@ class AccountsRepository() {
     init {
         if(firebaseAuth.currentUser != null){
             _userMutableLiveData.value = firebaseAuth.currentUser
+            checkHouse()
             _loggedOutMutableLiveData.value = false
         }
     }
@@ -91,5 +94,37 @@ class AccountsRepository() {
     fun logOut(){
         firebaseAuth.signOut()
         _loggedOutMutableLiveData.value = true
+    }
+
+    fun checkHouse() : MutableLiveData<Boolean> {
+        val mutableLiveData = MutableLiveData<Boolean>()
+        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                mutableLiveData.value = true
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun accountData() : MutableLiveData<AccountResponse> {
+        val mutableLiveData = MutableLiveData<AccountResponse>()
+        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
+            val response = AccountResponse()
+            if (task.isSuccessful) {
+                val result = task.result
+                result?.let {
+                    response.account = Account()
+                    response.account?.email = it.child("email").value.toString()
+                    response.account?.firstName = it.child("firstName").value.toString()
+                    response.account?.lastName = it.child("lastName").value.toString()
+                    response.account?.houseId = it.child("houseId").value.toString()
+                }
+            }
+            else{
+                response.exception = task.exception
+            }
+            mutableLiveData.value = response
+        }
+        return mutableLiveData
     }
 }

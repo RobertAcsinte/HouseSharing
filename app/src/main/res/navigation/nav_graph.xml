@@ -10,23 +10,22 @@
         android:name="com.example.housesharing.view.LoginFragment"
         android:label="LoginFragment">
         <action
-            android:id="@+id/action_loginFragment_to_loggedInFragment"
-            app:destination="@id/loggedInFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_noHouseFragment"
-            app:destination="@id/noHouseFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_loginFragment_to_loadFragment"
+            app:destination="@id/loadFragment" />
     </fragment>
     <fragment
         android:id="@+id/loggedInFragment"
         android:name="com.example.housesharing.view.LoggedInFragment"
-        android:label="LoggedInFragment" />
+        android:label="LoggedInFragment" >
+        <action
+            android:id="@+id/action_loggedInFragment_to_noHouseFragment"
+            app:destination="@id/noHouseFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.housesharing.view.AccountFragment"
@@ -42,21 +41,38 @@
         android:name="com.example.housesharing.view.RegisterFragment"
         android:label="RegisterFragment" >
         <action
-            android:id="@+id/action_registerFragment_to_loggedInFragment"
-            app:destination="@id/loggedInFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_registerFragment_to_loadFragment"
+            app:destination="@id/loadFragment" />
     </fragment>
     <fragment
         android:id="@+id/noHouseFragment"
-        android:name="com.example.housesharing.view.NoHouseFragment"
+        android:name="com.example.housesharing.noHouse.NoHouseFragment"
         android:label="NoHouseFragment" >
         <action
             android:id="@+id/action_noHouseFragment_to_createHouseFragment"
             app:destination="@id/createHouseFragment" />
+        <argument
+            android:name="account"
+            app:argType="com.example.housesharing.model.Account" />
     </fragment>
     <fragment
         android:id="@+id/createHouseFragment"
         android:name="com.example.housesharing.view.CreateHouseFragment"
         android:label="CreateHouseFragment" />
+    <fragment
+        android:id="@+id/loadFragment"
+        android:name="com.example.housesharing.view.LoadFragment"
+        android:label="fragment_load"
+        tools:layout="@layout/fragment_load" >
+        <action
+            android:id="@+id/action_loadFragment_to_loggedInFragment"
+            app:destination="@id/loggedInFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loadFragment_to_noHouseFragment"
+            app:destination="@id/noHouseFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

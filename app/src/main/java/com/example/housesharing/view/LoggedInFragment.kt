@@ -52,6 +52,12 @@ class LoggedInFragment : Fragment() {
             }
         })
 
+        accountViewModel.hasHouse().observe(viewLifecycleOwner) {
+            if(it == true) {
+                view?.findNavController()?.navigate(R.id.action_loggedInFragment_to_noHouseFragment)
+            }
+        }
+
         notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
         notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
             print(it)

@@ -1,4 +1,4 @@
-package com.example.housesharing.view
+package com.example.housesharing.today
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -11,11 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.housesharing.model.NoteResponse
+import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.R
-import com.example.housesharing.databinding.FragmentLoggedInBinding
-import com.example.housesharing.viewModel.AccountViewModel
-import com.example.housesharing.viewModel.NotesViewModel
+import com.example.housesharing.databinding.FragmentTodayBinding
+import com.example.housesharing.notes.NotesViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -24,12 +23,12 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 
-class LoggedInFragment : Fragment() {
+class TodayFragment : Fragment() {
 
-    private lateinit var accountViewModel:  AccountViewModel
+    private lateinit var todayViewModel: TodayViewModel
     private lateinit var notesViewModel: NotesViewModel
 
-    private lateinit var binding: FragmentLoggedInBinding
+    private lateinit var binding: FragmentTodayBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,25 +37,19 @@ class LoggedInFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_logged_in,
+            R.layout.fragment_today,
             container,
             false
         )
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarLoggedIn)
 
-        accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-        accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
+        todayViewModel = ViewModelProvider(this).get(TodayViewModel::class.java)
+        todayViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
                 binding.textViewEmail.text = user.email
             }
         })
-
-        accountViewModel.hasHouse().observe(viewLifecycleOwner) {
-            if(it == true) {
-                view?.findNavController()?.navigate(R.id.action_loggedInFragment_to_noHouseFragment)
-            }
-        }
 
         notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
         notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
@@ -66,8 +59,6 @@ class LoggedInFragment : Fragment() {
                 Log.d("sloboz", "PULAAA")
             }
         }
-
-
 
         setHasOptionsMenu(true)
         return binding.root
@@ -83,8 +74,6 @@ class LoggedInFragment : Fragment() {
         onNavDestinationSelected(item,requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
-
-
 
 
     private fun print(noteResponse: NoteResponse) {

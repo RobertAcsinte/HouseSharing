@@ -1,9 +1,9 @@
-package com.example.housesharing.viewModel
+package com.example.housesharing.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.housesharing.model.NoteResponse
-import com.example.housesharing.repository.NotesRepository
+import com.example.housesharing.data.NoteResponse
+import com.example.housesharing.data.source.NotesRepository
 
 class NotesViewModel (
     private val repository: NotesRepository = NotesRepository()

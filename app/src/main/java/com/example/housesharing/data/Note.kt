@@ -1,4 +1,4 @@
-package com.example.housesharing.model
+package com.example.housesharing.data
 
 data class Note (
     var title: String? = null,

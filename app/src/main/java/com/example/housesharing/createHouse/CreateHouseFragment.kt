@@ -1,4 +1,4 @@
-package com.example.housesharing.view
+package com.example.housesharing.createHouse
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentCreateHouseBinding
-import com.example.housesharing.databinding.FragmentLoginRegisterBinding
 
 class CreateHouseFragment : Fragment() {
 

@@ -3,7 +3,7 @@ package com.example.housesharing.noHouse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.housesharing.model.Account
+import com.example.housesharing.data.Account
 
 class NoHouseViewModel(account: Account): ViewModel() {
 

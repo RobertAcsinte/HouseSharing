@@ -1,4 +1,4 @@
-package com.example.housesharing.view
+package com.example.housesharing.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

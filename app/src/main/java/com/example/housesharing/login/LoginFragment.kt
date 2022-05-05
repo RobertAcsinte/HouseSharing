@@ -1,4 +1,4 @@
-package com.example.housesharing.view
+package com.example.housesharing.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,15 +12,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
-import com.example.housesharing.databinding.FragmentLoginRegisterBinding
-import com.example.housesharing.viewModel.AccountViewModel
+import com.example.housesharing.databinding.FragmentLoginBinding
+
 
 
 class LoginFragment : Fragment() {
 
-    private lateinit var accountViewModel: AccountViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
-    private lateinit var binding: FragmentLoginRegisterBinding
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class LoginFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_login_register,
+            R.layout.fragment_login,
             container,
             false
         )
@@ -37,8 +37,8 @@ class LoginFragment : Fragment() {
 
 
         //Go to LoggedInFragment if the user is already logged in
-        accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-        accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
                 view?.findNavController()?.navigate(R.id.action_loginFragment_to_loadFragment)
             }
@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
             var password: String = binding.editTextTextPasswordLogin.text.toString()
 
             if(email.isNotEmpty() && password.isNotEmpty()){
-                accountViewModel.login(email, password).observe(viewLifecycleOwner){
+                loginViewModel.login(email, password).observe(viewLifecycleOwner){
                     if(it.exception != null){
                         Toast.makeText(context, it.exception!!.message.toString(),
                             Toast.LENGTH_SHORT).show()

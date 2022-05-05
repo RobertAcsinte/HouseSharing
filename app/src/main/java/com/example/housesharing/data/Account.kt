@@ -1,4 +1,4 @@
-package com.example.housesharing.model
+package com.example.housesharing.data
 
 import android.os.Parcel
 import android.os.Parcelable

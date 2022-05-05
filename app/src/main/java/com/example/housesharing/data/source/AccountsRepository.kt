@@ -1,21 +1,16 @@
-package com.example.housesharing.repository
+package com.example.housesharing.data.source
 
-import android.app.Application
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.housesharing.model.Account
-import com.example.housesharing.model.AccountResponse
-import com.example.housesharing.model.Note
-import com.example.housesharing.model.NoteResponse
+import com.example.housesharing.data.Account
+import com.example.housesharing.data.AccountResponse
 import com.example.housesharing.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class AccountsRepository() {
@@ -35,7 +30,6 @@ class AccountsRepository() {
     init {
         if(firebaseAuth.currentUser != null){
             _userMutableLiveData.value = firebaseAuth.currentUser
-            checkHouse()
             _loggedOutMutableLiveData.value = false
         }
     }
@@ -70,7 +64,7 @@ class AccountsRepository() {
         myRef.child(uid!!).setValue(response.account)
     }
 
-    fun login(email: String, password: String): MutableLiveData<AccountResponse>{
+    fun login(email: String, password: String): MutableLiveData<AccountResponse> {
         val mutableLiveData = MutableLiveData<AccountResponse>()
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener() { task ->
@@ -83,7 +77,7 @@ class AccountsRepository() {
                         response.account?.email = it.user?.email
                     }
                 } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                     response.exception = task.exception
                 }
                 mutableLiveData.value = response
@@ -94,16 +88,6 @@ class AccountsRepository() {
     fun logOut(){
         firebaseAuth.signOut()
         _loggedOutMutableLiveData.value = true
-    }
-
-    fun checkHouse() : MutableLiveData<Boolean> {
-        val mutableLiveData = MutableLiveData<Boolean>()
-        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                mutableLiveData.value = true
-            }
-        }
-        return mutableLiveData
     }
 
     fun accountData() : MutableLiveData<AccountResponse> {
@@ -127,4 +111,6 @@ class AccountsRepository() {
         }
         return mutableLiveData
     }
+
+
 }

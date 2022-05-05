@@ -1,4 +1,4 @@
-package com.example.housesharing.view
+package com.example.housesharing.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,15 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
-import com.example.housesharing.databinding.FragmentAccountBinding
-import com.example.housesharing.viewModel.AccountViewModel
+import com.example.housesharing.databinding.FragmentProfileBinding
 
 
-class AccountFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var accountViewModel: AccountViewModel
+    private lateinit var profileViewModel: ProfileViewModel
 
-    private lateinit var binding: FragmentAccountBinding
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,20 +26,20 @@ class AccountFragment : Fragment() {
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_account,
+            R.layout.fragment_profile,
             container,
             false
         )
 
-        accountViewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-        accountViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
                 binding.textViewAccountEmail.text = user.email
             }
         })
 
         //if user is logged out, go to register/login fragment
-        accountViewModel.loggedOutMutableLiveData.observe(viewLifecycleOwner, Observer { logged ->
+        profileViewModel.loggedOutMutableLiveData.observe(viewLifecycleOwner, Observer { logged ->
             if (logged) {
                 view?.findNavController()?.navigate(R.id.action_accountFragment_to_loginFragment)
             }
@@ -52,7 +51,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun logoutButton(){
-        binding.buttonAccountLogOut.setOnClickListener { accountViewModel.logOut() }
+        binding.buttonAccountLogOut.setOnClickListener { profileViewModel.logOut() }
     }
 
 

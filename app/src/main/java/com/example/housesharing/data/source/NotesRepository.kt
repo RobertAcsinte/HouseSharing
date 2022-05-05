@@ -1,10 +1,10 @@
-package com.example.housesharing.repository
+package com.example.housesharing.data.source
 
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.housesharing.model.Note
-import com.example.housesharing.model.NoteResponse
+import com.example.housesharing.data.Note
+import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.utils.Constants.NOTES_REF
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database

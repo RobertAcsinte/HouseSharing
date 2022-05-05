@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.housesharing.R
-import com.example.housesharing.databinding.FragmentCreateHouseBinding
 import com.example.housesharing.databinding.FragmentNoHouseBinding
+
 
 
 class NoHouseFragment : Fragment() {
@@ -36,7 +38,29 @@ class NoHouseFragment : Fragment() {
             .get(NoHouseViewModel::class.java)
         binding.textViewNoHouseName.text = getString(R.string.hello) + " " + viewModel.nameLive.value.toString()
 
+        joinButton()
         return binding.root
+    }
+
+    private fun joinButton(){
+        binding.buttonJoinHouse.setOnClickListener {
+            var id: String = binding.editTextTextHouseIdJoin.text.toString()
+            if(id.isNotEmpty()){
+                viewModel.joinHouse(id).observe(viewLifecycleOwner){
+                    if(it == false){
+                        Toast.makeText(context, "No house with this ID!",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        view?.findNavController()?.navigate(R.id.action_noHouseFragment_to_todayFragment)
+                    }
+                }
+            }
+            else{
+                Toast.makeText(context, "Please fill out the field!",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

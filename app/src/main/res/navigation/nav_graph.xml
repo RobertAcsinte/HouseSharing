@@ -19,13 +19,7 @@
     <fragment
         android:id="@+id/todayFragment"
         android:name="com.example.housesharing.today.TodayFragment"
-        android:label="todayFragment">
-        <action
-            android:id="@+id/action_todayFragment_to_noHouseFragment"
-            app:destination="@id/noHouseFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        android:label="todayFragment"/>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.housesharing.profile.ProfileFragment"
@@ -54,6 +48,9 @@
         <argument
             android:name="account"
             app:argType="com.example.housesharing.data.Account" />
+        <action
+            android:id="@+id/action_noHouseFragment_to_todayFragment"
+            app:destination="@id/todayFragment" />
     </fragment>
     <fragment
         android:id="@+id/createHouseFragment"

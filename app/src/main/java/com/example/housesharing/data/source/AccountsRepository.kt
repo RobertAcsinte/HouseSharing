@@ -17,6 +17,7 @@ class AccountsRepository() {
     private val rootRef: FirebaseDatabase = Firebase.database
     private val accountRef: DatabaseReference = rootRef.getReference(Constants.ACCOUNT_REF)
 
+
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _userMutableLiveData = MutableLiveData<FirebaseUser>()
@@ -28,6 +29,8 @@ class AccountsRepository() {
         get() = _loggedOutMutableLiveData
 
     init {
+        accountRef.keepSynced(true)
+
         if(firebaseAuth.currentUser != null){
             _userMutableLiveData.value = firebaseAuth.currentUser
             _loggedOutMutableLiveData.value = false

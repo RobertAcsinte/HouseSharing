@@ -51,6 +51,10 @@ class TodayFragment : Fragment() {
             }
         })
 
+        todayViewModel.getData().observe(viewLifecycleOwner){
+            binding.textViewHouseId.text = it.account!!.houseId
+        }
+
         notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
         notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
             print(it)

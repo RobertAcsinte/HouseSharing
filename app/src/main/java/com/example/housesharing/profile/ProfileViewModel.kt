@@ -2,6 +2,7 @@ package com.example.housesharing.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.housesharing.data.AccountResponse
 import com.example.housesharing.data.source.AccountsRepository
 import com.google.firebase.auth.FirebaseUser
 
@@ -19,6 +20,10 @@ class ProfileViewModel(private val repository: AccountsRepository = AccountsRepo
 
     fun logOut(){
         repository.logOut()
+    }
+
+    fun getData(): LiveData<AccountResponse>{
+        return repository.accountData()
     }
 
 }

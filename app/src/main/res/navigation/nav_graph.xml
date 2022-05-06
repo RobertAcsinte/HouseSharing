@@ -55,7 +55,11 @@
     <fragment
         android:id="@+id/createHouseFragment"
         android:name="com.example.housesharing.createHouse.CreateHouseFragment"
-        android:label="CreateHouseFragment" />
+        android:label="CreateHouseFragment" >
+        <action
+            android:id="@+id/action_createHouseFragment_to_todayFragment"
+            app:destination="@id/todayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loadFragment"
         android:name="com.example.housesharing.load.LoadFragment"

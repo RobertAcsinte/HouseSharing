@@ -39,6 +39,7 @@ class NoHouseFragment : Fragment() {
         binding.textViewNoHouseName.text = getString(R.string.hello) + " " + viewModel.nameLive.value.toString()
 
         joinButton()
+        createButton()
         return binding.root
     }
 
@@ -60,6 +61,12 @@ class NoHouseFragment : Fragment() {
                 Toast.makeText(context, "Please fill out the field!",
                     Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun createButton(){
+        binding.buttonCreateHouseNoHouse.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_noHouseFragment_to_createHouseFragment)
         }
     }
 

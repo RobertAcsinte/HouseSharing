@@ -45,6 +45,10 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        profileViewModel.getData().observe(viewLifecycleOwner){
+            binding.textViewProfileHouse.text =it.account!!.houseId
+        }
+
         logoutButton()
 
         return binding.root

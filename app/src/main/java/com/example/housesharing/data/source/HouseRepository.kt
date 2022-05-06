@@ -36,8 +36,22 @@ class HouseRepository {
         return mutableLiveData
     }
 
-//    private fun createHouse(uid: String?, response: AccountResponse): MutableLiveData<HouseResponse> {
-//        val database = Firebase.database
-//        accountRef.child(uid!!).setValue(response.account)
-//    }
+    fun createHouse(houseName: String): MutableLiveData<HouseResponse>{
+        val mutableLiveData = MutableLiveData<HouseResponse>()
+        var generatedKey = houseRef.push().key
+        val response = HouseResponse()
+        houseRef.child(generatedKey!!).child("members").child(firebaseAuth.uid!!).setValue(true).addOnFailureListener {
+            response.exception = it
+        }
+        houseRef.child(generatedKey!!).child("name").setValue(houseName).addOnFailureListener{
+            response.exception = it
+        }
+        userRef.child(firebaseAuth.uid!!).child("houseId").setValue(generatedKey).addOnFailureListener {
+            response.exception = it
+        }
+        mutableLiveData.value = response
+
+        return mutableLiveData
+    }
+
 }

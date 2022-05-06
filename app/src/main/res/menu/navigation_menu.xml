@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/today"
+        android:icon="@drawable/today_48"
+        android:title="@string/today" />
+
+    <item
+        android:id="@+id/notes"
+        android:icon="@drawable/note_48"
+        android:title="@string/notes"/>
+
+    <item
+        android:id="@+id/kitchen"
+        android:icon="@drawable/kitchen_48"
+        android:title="@string/kitchen"/>
+
+    <item
+        android:id="@+id/bathroom"
+        android:icon="@drawable/bathroom_48"
+        android:title="@string/bathroom"/>
+</menu>

@@ -7,4 +7,6 @@
     <color name="button_primary">#ECF0FF</color>
     <color name="button_secondary">#FEE5BE</color>
     <color name="text_color">#000000</color>
+    <color name="bottom">#FBFBFB</color>
+    <color name="indicator">#ECF0FF</color>
 </resources>

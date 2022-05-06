@@ -34,4 +34,13 @@
         <item name="android:background">@drawable/edit_text_rounded</item>
     </style>
 
+    <style name="Navbar" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/bottom</item>
+        <item name="itemActiveIndicatorStyle">@style/App.Custom.Indicator</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/indicator</item>
+    </style>
+
 </resources>

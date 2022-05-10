@@ -76,4 +76,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.housesharing.notes.NotesFragment"
+        android:label="NotesFragment" />
 </navigation>

@@ -16,7 +16,7 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/rounded_edit_text_light.xml" value="0.3145" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/splash_background.xml" value="0.1805" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/today_24.xml" value="0.1735" />
-        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/activity_main.xml" value="0.31145833333333334" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_account.xml" value="0.22" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_auth.xml" value="0.2672239108409321" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_create_house.xml" value="0.3333333333333333" />
@@ -27,10 +27,11 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_login_register.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_main.xml" value="0.5505208333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_no_house.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_notes.xml" value="0.22" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_profile.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_register.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_second.xml" value="0.40404040404040403" />
-        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_today.xml" value="0.5" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_today.xml" value="0.42777777777777776" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/menu/navigation_menu.xml" value="0.3277777777777778" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/menu/options_menu.xml" value="0.27314814814814814" />
       </map>

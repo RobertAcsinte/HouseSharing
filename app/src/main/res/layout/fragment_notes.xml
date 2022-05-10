@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/LayoutLoggedIn"
+        android:id="@+id/frameLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".today.TodayFragment">
+        tools:context=".notes.NotesFragment">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarLoggedIn"
+            android:id="@+id/toolbarNotes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
@@ -20,25 +20,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewEmail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="@string/email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn"
-            tools:ignore="TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/textViewHouseId"
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HouseId"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:text="notes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbarNotes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

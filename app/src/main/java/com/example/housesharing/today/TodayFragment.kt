@@ -5,16 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.R
+import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.databinding.FragmentTodayBinding
 import com.example.housesharing.notes.NotesViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -43,6 +46,10 @@ class TodayFragment : Fragment() {
         )
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarLoggedIn)
+        (activity as AppCompatActivity).title = "Schedule of the day"
+
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility = View.VISIBLE
 
         todayViewModel = ViewModelProvider(this).get(TodayViewModel::class.java)
         todayViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
@@ -63,6 +70,8 @@ class TodayFragment : Fragment() {
                 Log.d("sloboz", "PULAAA")
             }
         }
+
+
 
         setHasOptionsMenu(true)
         return binding.root

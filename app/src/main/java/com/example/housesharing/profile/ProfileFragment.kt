@@ -1,16 +1,17 @@
 package com.example.housesharing.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentProfileBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class ProfileFragment : Fragment() {
@@ -30,6 +31,9 @@ class ProfileFragment : Fragment() {
             container,
             false
         )
+
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility = View.GONE
 
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         profileViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->

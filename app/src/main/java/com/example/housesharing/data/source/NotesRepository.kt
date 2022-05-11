@@ -3,10 +3,7 @@ package com.example.housesharing.data.source
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.housesharing.data.Account
-import com.example.housesharing.data.AccountResponse
-import com.example.housesharing.data.Note
-import com.example.housesharing.data.NoteResponse
+import com.example.housesharing.data.*
 import com.example.housesharing.utils.Constants
 import com.example.housesharing.utils.Constants.NOTES_REF
 import com.google.firebase.auth.FirebaseAuth
@@ -57,6 +54,29 @@ class NotesRepository {
                         }
                         mutableLiveData.value = response
                     }
+                }
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun createNote(noteTitle: String, noteContent: String): MutableLiveData<NoteResponse>{
+        val mutableLiveData = MutableLiveData<NoteResponse>()
+        var generatedKey = notesRef.push().key
+        val response = NoteResponse()
+        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                task.result.value.toString()?.let {
+                    notesRef.child(it).child(generatedKey!!).child("title").setValue(noteTitle).addOnFailureListener { exception ->
+                        response.exception = exception
+                    }
+                    notesRef.child(it).child(generatedKey!!).child("content").setValue(noteContent).addOnFailureListener { exception ->
+                        response.exception = exception
+                    }
+                    notesRef.child(it).child(generatedKey!!).child("date").setValue(ServerValue.TIMESTAMP).addOnFailureListener { exception ->
+                        response.exception = exception
+                    }
+                    mutableLiveData.value = response
                 }
             }
         }

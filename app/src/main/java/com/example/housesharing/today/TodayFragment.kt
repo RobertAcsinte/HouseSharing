@@ -29,7 +29,6 @@ import com.google.firebase.ktx.Firebase
 class TodayFragment : Fragment() {
 
     private lateinit var todayViewModel: TodayViewModel
-    private lateinit var notesViewModel: NotesViewModel
 
     private lateinit var binding: FragmentTodayBinding
 
@@ -62,14 +61,6 @@ class TodayFragment : Fragment() {
             binding.textViewHouseId.text = it.account!!.houseId
         }
 
-        notesViewModel = ViewModelProvider(this).get(NotesViewModel::class.java)
-        notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
-            print(it)
-            Log.d("sloboz", it.toString())
-            if(it.exception == null){
-                Log.d("sloboz", "PULAAA")
-            }
-        }
 
 
 
@@ -89,53 +80,55 @@ class TodayFragment : Fragment() {
     }
 
 
-    private fun print(noteResponse: NoteResponse) {
-        noteResponse.notes?.let { products ->
-            products.forEach{ product ->
-                product.title?.let {
-                    Log.d("PISAT", it)
-                }
-            }
-        }
+//    private fun print(noteResponse: NoteResponse) {
+//        noteResponse.notes?.let { products ->
+//            products.forEach{ product ->
+//                product.title?.let {
+//                    Log.d("PISAT", it)
+//                }
+//            }
+//        }
+//
+//        noteResponse.exception?.let { exception ->
+//            exception.message?.let {
+//                Log.d("PISAT", it)
+//            }
+//        }
+//    }
+//
+//    private fun getResponseUsingLiveData() {
+//        notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
+//            print(it)
+//            Log.d("sloboz", it.toString())
+//        }
+//    }
+//
+//    fun basicReadWrite() {
+//        // [START write_message]
+//        // Write a message to the database
+//        val database = Firebase.database
+//        val myRef = database.getReference("message")
+//
+//        myRef.setValue("Hello, World!")
+//        // [END write_message]
+//
+//        // [START read_message]
+//        // Read from the database
+//        myRef.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                val value = dataSnapshot.getValue<String>()
+//                Log.d(TAG, "Value is: $value")
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException())
+//            }
+//        })
+//        // [END read_message]
+//    }
 
-        noteResponse.exception?.let { exception ->
-            exception.message?.let {
-                Log.d("PISAT", it)
-            }
-        }
-    }
 
-    private fun getResponseUsingLiveData() {
-        notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
-            print(it)
-            Log.d("sloboz", it.toString())
-        }
-    }
-
-    fun basicReadWrite() {
-        // [START write_message]
-        // Write a message to the database
-        val database = Firebase.database
-        val myRef = database.getReference("message")
-
-        myRef.setValue("Hello, World!")
-        // [END write_message]
-
-        // [START read_message]
-        // Read from the database
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = dataSnapshot.getValue<String>()
-                Log.d(TAG, "Value is: $value")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
-        // [END read_message]
-    }
 }

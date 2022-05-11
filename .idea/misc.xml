@@ -7,8 +7,10 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/button_primary.xml" value="0.1635" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/button_primary_dark.xml" value="0.3155" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/button_primary_light.xml" value="0.3155" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/button_rounded.xml" value="0.195" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/edit_text_rounded.xml" value="0.3135" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1735" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/items_rounded.xml" value="0.195" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/kitchen_48.xml" value="0.1735" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/note_24.xml" value="0.1735" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/rounded_edit_text.xml" value="0.3145" />
@@ -32,6 +34,7 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_register.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_second.xml" value="0.40404040404040403" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_today.xml" value="0.42777777777777776" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/notes_view.xml" value="0.5251215559157212" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/menu/navigation_menu.xml" value="0.3277777777777778" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/menu/options_menu.xml" value="0.27314814814814814" />
       </map>

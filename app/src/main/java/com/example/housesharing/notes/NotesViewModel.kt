@@ -10,6 +10,6 @@ class NotesViewModel (
     ): ViewModel() {
 
     fun getResponseUsingLiveData() : LiveData<NoteResponse> {
-        return repository.getResponseFromRealtimeDatabaseUsingLiveData()
+        return repository.fetchNotes()
     }
 }

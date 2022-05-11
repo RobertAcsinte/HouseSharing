@@ -58,6 +58,10 @@ class NotesFragment : Fragment(), NotesAdapter.OnItemClickListener {
             }
         }
 
+        binding.floatingActionButtonAddNote.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_notesFragment_to_addNoteFragment)
+        }
+
 
         return binding.root
     }

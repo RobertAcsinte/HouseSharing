@@ -79,5 +79,13 @@
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.example.housesharing.notes.NotesFragment"
-        android:label="NotesFragment" />
+        android:label="NotesFragment" >
+        <action
+            android:id="@+id/action_notesFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.example.housesharing.addNotes.AddNoteFragment"
+        android:label="AddNoteFragment" />
 </navigation>

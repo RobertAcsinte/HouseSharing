@@ -37,9 +37,10 @@ class DetailsNoteFragment : Fragment() {
             .get(DetailsNoteViewModel::class.java)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
-        (activity as AppCompatActivity).title = viewModel.noteTitle.value
+        (activity as AppCompatActivity).title = ""
 
-        binding.textViewNoteContentDetails.text = viewModel.noteContent.value
+        binding.editTextTextNoteDetailsTitle.setText(viewModel.noteTitle.value)
+        binding.editTextTextNoteDetailsContent.setText(viewModel.noteContent.value)
 
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         navBar.visibility = View.VISIBLE
@@ -60,7 +61,12 @@ class DetailsNoteFragment : Fragment() {
             viewModel.deleteNote(viewModel.noteId.value.toString()).observe(viewLifecycleOwner){
                 view?.findNavController()?.navigate(R.id.action_detailsNoteFragment_to_notesFragment2)
             }
-
+        }
+        if (item.itemId == R.id.editNote) {
+            viewModel.editNote(viewModel.noteId.value.toString(),
+                    binding.editTextTextNoteDetailsTitle.text.toString(), binding.editTextTextNoteDetailsContent.text.toString()).observe(viewLifecycleOwner){
+                view?.findNavController()?.navigate(R.id.action_detailsNoteFragment_to_notesFragment2)
+            }
         }
         return super.onOptionsItemSelected(item);
     }

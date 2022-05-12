@@ -30,4 +30,8 @@ class DetailsNoteViewModel(note: Note, private val repository: NotesRepository =
     fun deleteNote(id: String): MutableLiveData<Boolean>{
         return repository.deleteNote(id)
     }
+
+    fun editNote(id: String, title: String, content: String): MutableLiveData<Boolean>{
+        return repository.editNote(id, title, content)
+    }
 }

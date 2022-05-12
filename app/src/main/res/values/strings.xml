@@ -31,4 +31,10 @@
     <string name="put_the_title_of_the_note">Put the title of the note</string>
     <string name="content">Content</string>
     <string name="you_can_write_anything_here">You can write anything here...</string>
+    <string name="note_content">Note Content</string>
+    <string name="note_title">Note Title</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

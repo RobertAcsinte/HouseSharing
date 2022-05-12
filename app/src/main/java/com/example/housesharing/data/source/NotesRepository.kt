@@ -97,6 +97,21 @@ class NotesRepository {
         return mutableLiveData
     }
 
+    fun editNote(noteId: String, noteTitle: String, noteContent: String): MutableLiveData<Boolean>{
+        val mutableLiveData = MutableLiveData<Boolean>()
+        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                task.result.value.toString()?.let {
+                    notesRef.child(it).child(noteId).child("title").setValue(noteTitle)
+                    notesRef.child(it).child(noteId).child("content").setValue(noteContent)
+                    mutableLiveData.value = true
+
+                }
+            }
+        }
+        return mutableLiveData
+    }
+
 //    fun getHouseNotes() : String {
 //        val notesId = ArrayList<String>()
 //        val mutableLiveData = MutableLiveData<NoteResponse>()

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.housesharing.R
 import com.example.housesharing.data.Note
 import com.example.housesharing.databinding.FragmentNotesBinding
+import com.example.housesharing.load.LoadFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -78,7 +79,9 @@ class NotesFragment : Fragment(), NotesAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: Note?) {
-        Toast.makeText(context, item!!.id.toString(), Toast.LENGTH_LONG).show()
+//        Toast.makeText(context, item!!.id.toString(), Toast.LENGTH_SHORT).show()
+        val action = NotesFragmentDirections.actionNotesFragmentToDetailsNoteFragment(item!!)
+        view?.findNavController()?.navigate(action)
     }
 
 

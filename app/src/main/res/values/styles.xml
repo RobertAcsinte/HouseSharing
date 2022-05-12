@@ -24,6 +24,12 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <style name="ContentNote" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
     <style name="ButtonPrimary" parent="Widget.MaterialComponents.Button">
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:background">@drawable/button_rounded</item>

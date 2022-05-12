@@ -88,6 +88,9 @@
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_notesFragment_to_detailsNoteFragment"
+            app:destination="@id/detailsNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
@@ -95,6 +98,19 @@
         android:label="AddNoteFragment" >
         <action
             android:id="@+id/action_addNoteFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsNoteFragment"
+        android:name="com.example.housesharing.detailsNote.DetailsNoteFragment"
+        android:label="DetailsNoteFragment" >
+        <argument
+            android:name="note"
+            app:argType="com.example.housesharing.data.Note" />
+        <action
+            android:id="@+id/action_detailsNoteFragment_to_notesFragment2"
             app:destination="@id/notesFragment"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />

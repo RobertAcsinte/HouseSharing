@@ -83,6 +83,20 @@ class NotesRepository {
         return mutableLiveData
     }
 
+    fun deleteNote(noteId: String): MutableLiveData<Boolean>{
+        val mutableLiveData = MutableLiveData<Boolean>()
+        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                task.result.value.toString()?.let {
+                    notesRef.child(it).child(noteId).removeValue().addOnCompleteListener {
+                        mutableLiveData.value = true
+                    }
+                }
+            }
+        }
+        return mutableLiveData
+    }
+
 //    fun getHouseNotes() : String {
 //        val notesId = ArrayList<String>()
 //        val mutableLiveData = MutableLiveData<NoteResponse>()

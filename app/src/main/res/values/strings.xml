@@ -37,4 +37,24 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="save_changes">Save Changes</string>
+    <string name="time">Time</string>
+    <string name="name">Name</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="m">M</string>
+    <string name="mo">Mo</string>
+    <string name="tu">Tu</string>
+    <string name="we">We</string>
+    <string name="th">Th</string>
+    <string name="fr">Fr</string>
+    <string name="sa">Sa</string>
+    <string name="su">Su</string>
+    <string name="arrow_left"><![CDATA[<]]></string>
+    <string name="arrow_right"><![CDATA[>]]></string>
+    <string name="this_week">This Week</string>
 </resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".kitchen.KitchenFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarLoggedIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonKitchenWeek">
+
+            <Button
+                android:id="@+id/buttonKitchenMonday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mo" />
+
+            <Button
+                android:id="@+id/buttonKitchenTuesday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tu" />
+
+            <Button
+                android:id="@+id/buttonKitchenWednesday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/we" />
+
+            <Button
+                android:id="@+id/buttonKitchenThursday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/th" />
+
+            <Button
+                android:id="@+id/buttonKitchenFriday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/fr"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/buttonKitchenSaturday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sa" />
+
+            <Button
+                android:id="@+id/buttonKitchenSunday"
+                style="@style/ButtonWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/su" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewKitchen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <Button
+            android:id="@+id/button"
+            style="@style/ButtonWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:minWidth="52dp"
+            android:text="@string/arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/ButtonWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:minWidth="52dp"
+            android:text="@string/arrow_right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
+
+        <Button
+            android:id="@+id/buttonKitchenWeek"
+            style="@style/ButtonWeek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/background_button_week_selected"
+            android:text="@string/this_week"
+            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

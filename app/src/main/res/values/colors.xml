@@ -10,4 +10,8 @@
     <color name="bottom">#FBFBFB</color>
     <color name="indicator">#ECF0FF</color>
     <color name="background_notes">#FFF1C0</color>
+    <color name="background_kitchen">#FFE7D1</color>
+    <color name="background_kitchen_reserved">#E3E2E0</color>
+    <color name="background_button_week">#F3F2F2</color>
+    <color name="background_button_week_selected">#ECF0FF</color>
 </resources>

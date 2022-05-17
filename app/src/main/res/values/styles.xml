@@ -31,7 +31,7 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="ButtonPrimary" parent="Widget.MaterialComponents.Button">
+    <style name="ButtonPrimary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:background">@drawable/button_rounded</item>
         <item name="android:padding">15dp</item>
@@ -39,14 +39,14 @@
     </style>
 
 
-    <style name="ButtonSecondary" parent="Widget.MaterialComponents.Button">
+    <style name="ButtonSecondary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:background">@drawable/button_rounded</item>
         <item name="android:padding">15dp</item>
         <item name="backgroundTint">@color/button_secondary</item>
     </style>
 
-    <style name="ButtonWeek" parent="Widget.MaterialComponents.Button">
+    <style name="ButtonWeek" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">10dp</item>
         <item name="backgroundTint">@color/background_button_week</item>

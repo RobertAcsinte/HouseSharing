@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.housesharing.data.Kitchen
 import com.example.housesharing.databinding.KitchenViewBinding
 
+
 class KitchenAdapter(var lists: List<Kitchen>, private val clickListener: OnItemClickListener): RecyclerView.Adapter<KitchenAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -16,7 +17,6 @@ class KitchenAdapter(var lists: List<Kitchen>, private val clickListener: OnItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-
         val binding = KitchenViewBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }

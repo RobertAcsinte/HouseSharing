@@ -21,90 +21,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonKitchenWeek">
-
-            <Button
-                android:id="@+id/buttonKitchenMonday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mo" />
-
-            <Button
-                android:id="@+id/buttonKitchenTuesday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tu" />
-
-            <Button
-                android:id="@+id/buttonKitchenWednesday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/we" />
-
-            <Button
-                android:id="@+id/buttonKitchenThursday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/th" />
-
-            <Button
-                android:id="@+id/buttonKitchenFriday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/fr"
-                tools:ignore="TextContrastCheck" />
-
-            <Button
-                android:id="@+id/buttonKitchenSaturday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sa" />
-
-            <Button
-                android:id="@+id/buttonKitchenSunday"
-                style="@style/ButtonWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/su" />
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewKitchen"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_previous_month_kitchen"
             style="@style/ButtonWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_next_month_kitchen"
             style="@style/ButtonWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
 
         <Button
-            android:id="@+id/buttonKitchenWeek"
+            android:id="@+id/buttonMonthKitchen"
             style="@style/ButtonWeek"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,10 +65,21 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/background_button_week_selected"
-            android:text="@string/this_week"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
-            app:layout_constraintStart_toEndOf="@+id/button"
+            android:text="@string/month"
+            app:layout_constraintEnd_toStartOf="@+id/button_next_month_kitchen"
+            app:layout_constraintStart_toEndOf="@+id/button_previous_month_kitchen"
             app:layout_constraintTop_toBottomOf="@+id/toolbarLoggedIn" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_previous_month_kitchen" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

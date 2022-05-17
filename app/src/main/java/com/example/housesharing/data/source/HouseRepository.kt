@@ -18,6 +18,7 @@ class HouseRepository {
     private val rootRef: FirebaseDatabase = Firebase.database
     private val houseRef: DatabaseReference = rootRef.getReference(Constants.HOUSE_REF)
     private val userRef: DatabaseReference = rootRef.getReference(Constants.ACCOUNT_REF)
+    lateinit var houseId: String
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -39,6 +40,9 @@ class HouseRepository {
     fun createHouse(houseName: String): MutableLiveData<HouseResponse>{
         val mutableLiveData = MutableLiveData<HouseResponse>()
         var generatedKey = houseRef.push().key
+        if (generatedKey != null) {
+            houseId = generatedKey
+        }
         val response = HouseResponse()
         houseRef.child(generatedKey!!).child("members").child(firebaseAuth.uid!!).setValue(true).addOnFailureListener {
             response.exception = it
@@ -54,4 +58,7 @@ class HouseRepository {
         return mutableLiveData
     }
 
+    fun createKitchen(houseId: String){
+        houseRef.child(houseId).child("thisWeek").child("monday")
+    }
 }

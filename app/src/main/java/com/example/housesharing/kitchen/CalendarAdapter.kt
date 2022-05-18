@@ -13,7 +13,7 @@ import com.example.housesharing.databinding.CalendarViewBinding
 
 class CalendarAdapter(private var list: List<CalendarDateModel>, private val clickListener: OnItemClickListener): RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
-    private var selectedItemPosition: Int = 0
+    var selectedItemPosition: Int = 0
 
     interface OnItemClickListener {
         fun onItemClick(item: CalendarDateModel?)
@@ -29,6 +29,7 @@ class CalendarAdapter(private var list: List<CalendarDateModel>, private val cli
         val item = list[position]
         holder.day.text = item.calendarDay
         holder.date.text = item.calendarDate
+
         if(selectedItemPosition == position){
             holder.colorSelected()
         }

@@ -1,6 +1,7 @@
 package com.example.housesharing.kitchen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -22,10 +23,31 @@ class KitchenAdapter(var lists: List<Kitchen>, private val clickListener: OnItem
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lists[position]
-        holder.time.text = item.time
-        holder.user.text = item.userId
+        if(item.timeStartHour!! < 10){
+            if(item.timeStartMinute == 0){
+                holder.time.text = "0" + item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + "0" + " - " + "0" + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString()
+            }
+            else{
+                if(item.timeEndHour != 10){
+                    holder.time.text = "0" + item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + " - " + "0" + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString() + "0"
+                }
+                else{
+                    holder.time.text = "0" + item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + " - " + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString() + "0"
+                }
+            }
+        }
+        else{
+            if(item.timeStartMinute == 0){
+                holder.time.text = item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + "0" + " - " + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString()
+            }
+            else{
+                holder.time.text = item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + " - " + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString() + "0"
+            }
+        }
+        holder.user.text = item.firstName.toString() + " " + item.lastName.toString()
         if(item.userId  == null){
             holder.user.text = "Available"
         }

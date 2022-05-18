@@ -30,13 +30,19 @@ class KitchenRepository {
         houseRef.keepSynced(true)
     }
 
-    fun createReservation(week: String, day: String, time: String): MutableLiveData<Boolean> {
+        fun createReservation(date: String, kitchen: Kitchen): MutableLiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()
-        val response = NoteResponse()
-        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
             if(task.isSuccessful){
-                task.result.value.toString()?.let {
-                    kitchenRef.child(it).child(week).child(day).child(time).setValue(firebaseAuth.uid)
+                task.result?.let {
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("timeStartHour").setValue(kitchen.timeStartHour)
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("timeStartMinute").setValue(kitchen.timeStartMinute)
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("timeEndHour").setValue(kitchen.timeEndHour)
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("timeEndMinute").setValue(kitchen.timeEndMinute)
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("userId").setValue(firebaseAuth.uid)
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("firstName").setValue(it.child("firstName").value.toString())
+                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(kitchen.id.toString()).child("lastName").setValue(it.child("lastName").value.toString())
+
                     mutableLiveData.value = true
                 }
             }
@@ -44,18 +50,23 @@ class KitchenRepository {
         return mutableLiveData
     }
 
-    fun fetchReservations(week: String, day: String): MutableLiveData<KitchenResponse> {
+
+    fun fetchReservations(date: String): MutableLiveData<KitchenResponse> {
         val mutableLiveData = MutableLiveData<KitchenResponse>()
         accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 task.result.value.toString()?.let {
-                    kitchenRef.child(it).child(week).child(day).get().addOnCompleteListener { snapshot ->
+                    kitchenRef.child(it).child(date).get().addOnCompleteListener { snapshot ->
                         val response = KitchenResponse()
                         if(snapshot.isSuccessful){
                             val result = snapshot.result
-                            result?.let {
-                                for(d: DataSnapshot in it.children){
-                                    var reservation = Kitchen(week, day, d.key.toString(), d.value.toString())
+                            result?.let { snapshot ->
+                                for(d: DataSnapshot in snapshot.children){
+                                    Log.d("RESERVATION", d.key.toString() + " - " + d.child("timeStartHour").value.toString())
+                                    var reservation = Kitchen(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
+                                        d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
+                                        d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
+                                        d.child("firstName").value.toString(), d.child("lastName").value.toString())
                                     response.kitchen!!.add(reservation)
                                 }
                             }

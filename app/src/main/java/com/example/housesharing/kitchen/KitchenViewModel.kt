@@ -13,8 +13,8 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
     var listHoursLiveData = MutableLiveData<ArrayList<Kitchen>>()
     var listHours = ArrayList<Kitchen>()
 
-    init {
-        createList()
+
+    init { createList()
     }
 
     private fun createList(){
@@ -38,7 +38,7 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
         return repository.fetchReservations(date)
     }
 
-    fun updateList(reservations: ArrayList<Kitchen> ){
+    fun updateList(reservations: ArrayList<Kitchen>, startHour: Int){
         createList()
         listHours.forEach { offline ->
             reservations.forEach { online ->
@@ -49,7 +49,14 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
                 }
             }
         }
-        listHoursLiveData.value = listHours
+
+        var tempHours = ArrayList<Kitchen>()
+        listHours.forEach {
+            if(it.timeStartHour!! >= startHour){
+                tempHours.add(it)
+            }
+        }
+        listHoursLiveData.value = tempHours
     }
 
 }

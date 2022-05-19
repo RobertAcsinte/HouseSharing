@@ -77,12 +77,15 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
 
         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
             if(it.exception == null){
-                viewModel.updateList(it.kitchen!!)
+                if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                    viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                }
+                else{
+                    viewModel.updateList(it.kitchen!!, 0)
+                }
             }
+            hoursAdapter.notifyDataSetChanged()
         }
-        calendarAdapter.notifyDataSetChanged()
-
-
         return binding.root
     }
 
@@ -121,7 +124,13 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
             setUpCalendar()
             viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                 if(it.exception == null){
-                    viewModel.updateList(it.kitchen!!)
+                    if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                        viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                    }
+                    else{
+                        viewModel.updateList(it.kitchen!!, 0)
+                    }
+                    hoursAdapter.notifyDataSetChanged()
                 }
             }
             calendarAdapter.selectedItemPosition = 0
@@ -132,7 +141,13 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
             setUpCalendar()
             viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                 if(it.exception == null){
-                    viewModel.updateList(it.kitchen!!)
+                    if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                        viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                    }
+                    else{
+                        viewModel.updateList(it.kitchen!!, 0)
+                    }
+                    hoursAdapter.notifyDataSetChanged()
                 }
             }
             calendarAdapter.selectedItemPosition = 0
@@ -189,7 +204,13 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
             viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
                 viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                     if(it.exception == null){
-                        viewModel.updateList(it.kitchen!!)
+                        if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                            viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                        }
+                        else{
+                            viewModel.updateList(it.kitchen!!, 0)
+                        }
+                        hoursAdapter.notifyDataSetChanged()
                     }
                 }
                 }
@@ -206,7 +227,12 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         }
         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
             if(it.exception == null){
-                viewModel.updateList(it.kitchen!!)
+                if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                    viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                }
+                else{
+                    viewModel.updateList(it.kitchen!!, 0)
+                }
             }
         }
         calendarAdapter.notifyDataSetChanged()

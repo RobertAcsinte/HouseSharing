@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -57,6 +58,14 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
 
         todayViewModel.fetchNotes().observe(viewLifecycleOwner) {
             if(it.exception == null){
+                if(it.notes!!.size == 0){
+                    binding.textViewNoNotes.visibility = View.VISIBLE
+                    binding.recyclerViewTodayNotes.visibility = View.GONE
+                }
+                else{
+                    binding.textViewNoNotes.visibility = View.INVISIBLE
+                    binding.recyclerViewTodayNotes.visibility = View.VISIBLE
+                }
                 val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 val adapter = NotesTodayAdapter(it.notes!!, this)
                 binding.recyclerViewTodayNotes.layoutManager = manager
@@ -66,6 +75,14 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
 
         todayViewModel.fetchKitchen().observe(viewLifecycleOwner) {
             if(it.exception == null){
+                if(it.appointment!!.size == 0){
+                    binding.textViewNoKitchen.visibility = View.VISIBLE
+                    binding.recyclerViewTodayKitchen.visibility = View.GONE
+                }
+                else{
+                    binding.textViewNoKitchen.visibility = View.INVISIBLE
+                    binding.recyclerViewTodayKitchen.visibility = View.VISIBLE
+                }
                 val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 val adapter = KitchenTodayAdapter(it.appointment!!)
                 binding.recyclerViewTodayKitchen.layoutManager = manager
@@ -75,6 +92,14 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
 
         todayViewModel.fetchBathroom().observe(viewLifecycleOwner) {
             if(it.exception == null){
+                if(it.appointment!!.size == 0){
+                    binding.textViewNoBathroom.visibility = View.VISIBLE
+                    binding.recyclerViewTodayBathroom.visibility = View.GONE
+                }
+                else{
+                    binding.textViewNoBathroom.visibility = View.INVISIBLE
+                    binding.recyclerViewTodayBathroom.visibility = View.VISIBLE
+                }
                 val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 val adapter = BathroomTodayAdapter(it.appointment!!)
                 binding.recyclerViewTodayBathroom.layoutManager = manager

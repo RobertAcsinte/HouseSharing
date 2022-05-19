@@ -60,5 +60,9 @@
     <string name="weekday">WeekDay</string>
     <string name="month">Month</string>
     <string name="_1">1</string>
+    <string name="there_are_not_any_pinned_notes">There are not any pinned notes!</string>
+    <string name="there_are_no_pinned_notes">There are no pinned notes!</string>
+    <string name="no_kitchen_appointments_today">No kitchen appointments today!</string>
+    <string name="no_bathroom_appointments_today">No bathroom appointments today!</string>
 
 </resources>

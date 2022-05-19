@@ -17,7 +17,7 @@
         android:title="@string/kitchen"/>
 
     <item
-        android:id="@+id/bathroom"
+        android:id="@+id/bathroomFragment"
         android:icon="@drawable/bathroom_48"
         android:title="@string/bathroom"/>
 </menu>

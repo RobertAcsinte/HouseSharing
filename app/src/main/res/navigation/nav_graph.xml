@@ -119,4 +119,8 @@
         android:id="@+id/kitchenFragment"
         android:name="com.example.housesharing.kitchen.KitchenFragment"
         android:label="KitchenFragment" />
+    <fragment
+        android:id="@+id/bathroomFragment"
+        android:name="com.example.housesharing.bathroom.BathroomFragment"
+        android:label="BathroomFragment" />
 </navigation>

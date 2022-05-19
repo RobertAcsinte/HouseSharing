@@ -12,32 +12,32 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class KitchenRepository {
+class BathroomRepository {
     private val rootRef: FirebaseDatabase = Firebase.database
     private val accountRef: DatabaseReference = rootRef.getReference(Constants.ACCOUNT_REF)
     private val houseRef: DatabaseReference = rootRef.getReference(Constants.HOUSE_REF)
-    private val kitchenRef: DatabaseReference = rootRef.getReference(Constants.KITCHEN_REF)
+    private val bathroomRef: DatabaseReference = rootRef.getReference(Constants.BATHROOM_REF)
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
         accountRef.keepSynced(true)
         houseRef.keepSynced(true)
-        kitchenRef.keepSynced(true)
+        bathroomRef.keepSynced(true)
     }
 
-        fun createReservation(date: String, appointment: Appointment): MutableLiveData<Boolean> {
+    fun createReservation(date: String, appointment: Appointment): MutableLiveData<Boolean> {
         val mutableLiveData = MutableLiveData<Boolean>()
         accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
             if(task.isSuccessful){
                 task.result?.let {
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeStartHour").setValue(appointment.timeStartHour)
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeStartMinute").setValue(appointment.timeStartMinute)
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeEndHour").setValue(appointment.timeEndHour)
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeEndMinute").setValue(appointment.timeEndMinute)
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("userId").setValue(firebaseAuth.uid)
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("firstName").setValue(it.child("firstName").value.toString())
-                    kitchenRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("lastName").setValue(it.child("lastName").value.toString())
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeStartHour").setValue(appointment.timeStartHour)
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeStartMinute").setValue(appointment.timeStartMinute)
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeEndHour").setValue(appointment.timeEndHour)
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("timeEndMinute").setValue(appointment.timeEndMinute)
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("userId").setValue(firebaseAuth.uid)
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("firstName").setValue(it.child("firstName").value.toString())
+                    bathroomRef.child(it.child("houseId").value.toString()).child(date).child(appointment.id.toString()).child("lastName").setValue(it.child("lastName").value.toString())
 
                     mutableLiveData.value = true
                 }
@@ -52,7 +52,7 @@ class KitchenRepository {
         accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 task.result.value.toString()?.let {
-                    kitchenRef.child(it).child(date).get().addOnCompleteListener { snapshot ->
+                    bathroomRef.child(it).child(date).get().addOnCompleteListener { snapshot ->
                         val response = AppointmentResponse()
                         if(snapshot.isSuccessful){
                             val result = snapshot.result

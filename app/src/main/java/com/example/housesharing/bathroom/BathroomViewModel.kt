@@ -1,13 +1,14 @@
-package com.example.housesharing.kitchen
+package com.example.housesharing.bathroom
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.housesharing.data.Appointment
 import com.example.housesharing.data.AppointmentResponse
-import com.example.housesharing.data.source.KitchenRepository
+import com.example.housesharing.data.source.BathroomRepository
 
-class KitchenViewModel(private val repository: KitchenRepository = KitchenRepository()): ViewModel() {
+
+class BathroomViewModel(private val repository: BathroomRepository = BathroomRepository()): ViewModel() {
 
     var listHoursLiveData = MutableLiveData<ArrayList<Appointment>>()
     var listHours = ArrayList<Appointment>()
@@ -33,7 +34,7 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
         return repository.createReservation(date, appointment)
     }
 
-    fun fetchReservations(date: String): LiveData<AppointmentResponse>{
+    fun fetchReservations(date: String): LiveData<AppointmentResponse> {
         return repository.fetchReservations(date)
     }
 

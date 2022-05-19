@@ -1,6 +1,6 @@
 package com.example.housesharing.data
 
-data class Kitchen (
+data class Appointment (
     var id: Int? = null,
     var timeStartHour: Int? = null,
     var timeStartMinute: Int? = null,

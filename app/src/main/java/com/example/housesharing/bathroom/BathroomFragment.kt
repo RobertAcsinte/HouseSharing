@@ -1,32 +1,31 @@
-package com.example.housesharing.kitchen
+package com.example.housesharing.bathroom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.housesharing.R
-import com.example.housesharing.data.CalendarDateModel
 import com.example.housesharing.data.Appointment
-import com.example.housesharing.databinding.FragmentKitchenBinding
+import com.example.housesharing.data.CalendarDateModel
+import com.example.housesharing.databinding.FragmentBathroomBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.*
 
+class BathroomFragment : Fragment(), BathroomAdapter.OnItemClickListener, CalendarBathroomAdapter.OnItemClickListener {
 
-class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, CalendarAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentBathroomBinding
 
-    private lateinit var binding: FragmentKitchenBinding
+    private lateinit var viewModel: BathroomViewModel
 
-    private lateinit var viewModel: KitchenViewModel
-
-    private lateinit var hoursAdapter: KitchenAdapter
+    private lateinit var hoursAdapter: BathroomAdapter
 
     private var listHour = ArrayList<Appointment>()
 
@@ -37,7 +36,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
     private val sdf = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     private val cal = Calendar.getInstance(Locale.ENGLISH)
     private val dates = ArrayList<Date>()
-    private lateinit var calendarAdapter: CalendarAdapter
+    private lateinit var calendarAdapter: CalendarBathroomAdapter
     private val calendarList = ArrayList<CalendarDateModel>()
 
 
@@ -49,12 +48,12 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_kitchen,
+            R.layout.fragment_bathroom,
             container,
             false
         )
 
-        viewModel = ViewModelProvider(this).get(KitchenViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BathroomViewModel::class.java)
 
         actionBar()
         navBar()
@@ -87,7 +86,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
 
     private fun actionBar(){
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarLoggedIn)
-        (activity as AppCompatActivity).title = "Kitchen"
+        (activity as AppCompatActivity).title = "Bathroom"
         setHasOptionsMenu(true)
     }
 
@@ -108,13 +107,13 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
     }
 
     private fun setUpCalendarAdapter() {
-        calendarAdapter = CalendarAdapter(calendarList, this)
-        binding.recyclerViewDate.adapter = calendarAdapter
+        calendarAdapter = CalendarBathroomAdapter(calendarList, this)
+        binding.recyclerViewDateBathroom.adapter = calendarAdapter
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun changeMonthButtons() {
-        binding.buttonNextMonthKitchen.setOnClickListener {
+        binding.buttonNextMonthBathroom.setOnClickListener {
             cal.add(Calendar.MONTH, 1)
             setUpCalendar()
             viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
@@ -131,7 +130,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
             calendarAdapter.selectedItemPosition = 0
             calendarAdapter.notifyDataSetChanged()
         }
-        binding.buttonPreviousMonthKitchen.setOnClickListener {
+        binding.buttonPreviousMonthBathroom.setOnClickListener {
             cal.add(Calendar.MONTH, -1)
             setUpCalendar()
             viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
@@ -154,7 +153,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
     private fun setUpCalendar() {
         val calendarListTemp = ArrayList<CalendarDateModel>()
         //current month and year
-        binding.buttonMonthKitchen.text = sdf.format(cal.time)
+        binding.buttonMonthBathroom.text = sdf.format(cal.time)
         val monthCalendar = cal.clone() as Calendar
         //maximum number of days in the current month
         var maxDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -162,7 +161,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         //current calendar month
         val calCurrent = Calendar.getInstance(Locale.ENGLISH)
         if(SimpleDateFormat("M", Locale.ENGLISH).format(calCurrent.time) == SimpleDateFormat("M", Locale.ENGLISH).format(cal.time)){
-            binding.buttonPreviousMonthKitchen.isEnabled = false
+            binding.buttonPreviousMonthBathroom.isEnabled = false
             monthCalendar.set(Calendar.DAY_OF_MONTH, SimpleDateFormat("d", Locale.ENGLISH).format(calCurrent.time).toString().toInt())
             selectedDay = SimpleDateFormat("d", Locale.ENGLISH).format(calCurrent.time).toString().toInt()
             maxDaysInMonth -= SimpleDateFormat("d", Locale.ENGLISH).format(calCurrent.time).toString().toInt() -1
@@ -170,7 +169,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         else {
             selectedDay = 1
             monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
-            binding.buttonPreviousMonthKitchen.isEnabled = true
+            binding.buttonPreviousMonthBathroom.isEnabled = true
         }
         //store all dates in array until max days of current month
         while (dates.size < maxDaysInMonth) {
@@ -186,9 +185,9 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
 
     private fun setupHoursAdapter(){
         val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-        hoursAdapter = KitchenAdapter(listHour, this)
-        binding.recyclerViewKitchen.layoutManager = manager
-        binding.recyclerViewKitchen.adapter = hoursAdapter
+        hoursAdapter = BathroomAdapter(listHour, this)
+        binding.recyclerViewBathroom.layoutManager = manager
+        binding.recyclerViewBathroom.adapter = hoursAdapter
     }
 
 

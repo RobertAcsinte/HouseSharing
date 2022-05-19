@@ -1,4 +1,4 @@
-package com.example.housesharing.kitchen
+package com.example.housesharing.bathroom
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,8 +10,7 @@ import com.example.housesharing.R
 import com.example.housesharing.data.Appointment
 import com.example.housesharing.databinding.AppointmentViewBinding
 
-
-class KitchenAdapter(var lists: List<Appointment>, private val clickListener: OnItemClickListener): RecyclerView.Adapter<KitchenAdapter.ViewHolder>() {
+class BathroomAdapter(var lists: List<Appointment>, private val clickListener: OnItemClickListener): RecyclerView.Adapter<BathroomAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(item: Appointment?)

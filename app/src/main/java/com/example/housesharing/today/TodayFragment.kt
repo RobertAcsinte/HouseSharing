@@ -13,9 +13,12 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.housesharing.R
+import com.example.housesharing.data.Note
 import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.databinding.FragmentTodayBinding
+import com.example.housesharing.notes.NotesAdapter
 import com.example.housesharing.notes.NotesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
@@ -26,7 +29,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 
-class TodayFragment : Fragment() {
+class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
 
     private lateinit var todayViewModel: TodayViewModel
 
@@ -51,18 +54,14 @@ class TodayFragment : Fragment() {
         navBar.visibility = View.VISIBLE
 
         todayViewModel = ViewModelProvider(this).get(TodayViewModel::class.java)
-        todayViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
-            if (user != null) {
-                binding.textViewEmail.text = user.email
+        todayViewModel.fetchNotes().observe(viewLifecycleOwner) {
+            if(it.exception == null){
+                val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+                val adapter = NotesTodayAdapter(it.notes!!, this)
+                binding.recyclerViewTodayNotes.layoutManager = manager
+                binding.recyclerViewTodayNotes.adapter = adapter
             }
-        })
-
-        todayViewModel.getData().observe(viewLifecycleOwner){
-            binding.textViewHouseId.text = it.account!!.houseId
         }
-
-
-
 
         setHasOptionsMenu(true)
         return binding.root
@@ -77,6 +76,11 @@ class TodayFragment : Fragment() {
         return NavigationUI.
         onNavDestinationSelected(item,requireView().findNavController())
                 || super.onOptionsItemSelected(item)
+    }
+
+    //notes
+    override fun onItemClick(item: Note?) {
+
     }
 
 

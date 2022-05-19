@@ -3,17 +3,15 @@ package com.example.housesharing.today
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.housesharing.data.AccountResponse
+import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.data.source.AccountsRepository
+import com.example.housesharing.data.source.NotesRepository
 import com.google.firebase.auth.FirebaseUser
 
-class TodayViewModel (private val repository: AccountsRepository = AccountsRepository()) :
-    ViewModel() {
+class TodayViewModel ( private val repository: NotesRepository = NotesRepository() ): ViewModel() {
 
-    private var _userMutableLiveData = repository.userMutableLiveData
-    val userMutableLiveData: LiveData<FirebaseUser>
-        get() = _userMutableLiveData
-
-    fun getData(): LiveData<AccountResponse>{
-        return repository.accountData()
+    fun fetchNotes() : LiveData<NoteResponse> {
+        return repository.fetchNotes()
     }
+
 }

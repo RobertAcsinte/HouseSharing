@@ -12,6 +12,7 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/date.xml" value="0.186" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/date_selected.xml" value="0.186" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/delete_48.xml" value="0.4875" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/dialog_bg.xml" value="0.231" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/done_48.xml" value="0.286" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/edit_text_rounded.xml" value="0.3135" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1735" />
@@ -25,6 +26,7 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/drawable/today_24.xml" value="0.1735" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/calendar_view.xml" value="0.2838541666666667" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/dialog.xml" value="0.2672239108409321" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_account.xml" value="0.22" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_add_note.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_auth.xml" value="0.2672239108409321" />
@@ -44,7 +46,7 @@
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_register.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_second.xml" value="0.40404040404040403" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/fragment_today.xml" value="0.42777777777777776" />
-        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/kitchen_view.xml" value="0.2672239108409321" />
+        <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/kitchen_view.xml" value="0.6" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/notes_view.xml" value="0.5251215559157212" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/layout/row_calendar_date.xml" value="0.32146829810901" />
         <entry key="..\:/Users/rober/AndroidStudioProjects/HouseSharing/app/src/main/res/menu/navigation_menu.xml" value="0.3277777777777778" />

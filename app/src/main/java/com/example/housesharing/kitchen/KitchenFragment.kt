@@ -1,10 +1,8 @@
 package com.example.housesharing.kitchen
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -197,10 +195,52 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
     //press on hour
     @SuppressLint("NotifyDataSetChanged")
     override fun onItemClick(item: Kitchen?) {
-        AlertDialog.Builder(requireContext())
-            .setMessage("Do you confirm making this booking?")
-            .setPositiveButton("Yes") { _, _ ->
-                if (item != null) {
+        if (item != null) {
+            var hourStart: String
+            var minuteStart: String
+            var hourEnd: String
+            var minuteEnd: String
+
+            if(item.timeStartHour!! < 10){
+                if(item.timeStartMinute == 0){
+                    hourStart = "0" + item.timeStartHour.toString()
+                    minuteStart = item.timeStartMinute.toString() + "0"
+                    hourEnd = "0" + item.timeEndHour.toString()
+                    minuteEnd = item.timeEndMinute.toString()
+                }
+                else{
+                    if(item.timeEndHour != 10){
+                        hourStart = "0" + item.timeStartHour.toString()
+                        minuteStart = item.timeStartMinute.toString()
+                        hourEnd = "0" + item.timeEndHour.toString()
+                        minuteEnd = item.timeEndMinute.toString() + "0"
+                    }
+                    else{
+                        hourStart = "0" + item.timeStartHour.toString()
+                        minuteStart = item.timeStartMinute.toString()
+                        hourEnd = item.timeEndHour.toString()
+                        minuteEnd = item.timeEndMinute.toString() + "0"
+                    }
+                }
+            }
+            else{
+                if(item.timeStartMinute == 0){
+                    hourStart = item.timeStartHour.toString()
+                    minuteStart = item.timeStartMinute.toString() + "0"
+                    hourEnd = item.timeEndHour.toString()
+                    minuteEnd = item.timeEndMinute.toString()
+                }
+                else{
+                    hourStart = item.timeStartHour.toString()
+                    minuteStart = item.timeStartMinute.toString()
+                    hourEnd = item.timeEndHour.toString()
+                    minuteEnd = item.timeEndMinute.toString() + "0"
+                }
+            }
+
+            AlertDialog.Builder(requireContext())
+                .setMessage("Confirm booking from $hourStart:$minuteStart to $hourEnd:$minuteEnd?")
+                .setPositiveButton("Yes") { _, _ ->
                     viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
                         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                             if(it.exception == null){
@@ -213,11 +253,11 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
                             }
                         }
                     }
-                }
-                calendarAdapter.notifyDataSetChanged()
+                    calendarAdapter.notifyDataSetChanged()
 
-            }
-            .setNegativeButton("No", null).show()
+                }
+                .setNegativeButton("No", null).show()
+        }
 
     }
 

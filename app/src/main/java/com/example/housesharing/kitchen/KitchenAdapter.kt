@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.housesharing.R
 import com.example.housesharing.data.Kitchen
 import com.example.housesharing.databinding.KitchenViewBinding
 
@@ -50,8 +52,13 @@ class KitchenAdapter(var lists: List<Kitchen>, private val clickListener: OnItem
         holder.user.text = item.firstName.toString() + " " + item.lastName.toString()
         if(item.userId  == null){
             holder.user.text = "Available"
+            holder.colorAvailable()
         }
-        holder.kitchenCell.setOnClickListener {
+        else{
+            holder.cell.isEnabled = false
+            holder.colorNotAvailable()
+        }
+        holder.cell.setOnClickListener {
             clickListener.onItemClick(lists[position])
         }
     }
@@ -63,7 +70,27 @@ class KitchenAdapter(var lists: List<Kitchen>, private val clickListener: OnItem
     class ViewHolder(val binding: KitchenViewBinding) : RecyclerView.ViewHolder(binding.root) {
         val time: TextView = binding.textViewKitchenTime
         val user: TextView = binding.textViewKitchenName
-        val kitchenCell = binding.kitchenCell
+        val cell = binding.cell
+
+
+        fun colorAvailable(){
+            binding.cell.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.background_kitchen
+                )
+            )
+        }
+
+        fun colorNotAvailable(){
+            binding.cell.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.background_kitchen_reserved
+                )
+            )
+        }
+
     }
 
 }

@@ -10,7 +10,7 @@ import com.example.housesharing.R
 import com.example.housesharing.data.Appointment
 import com.example.housesharing.databinding.AppointmentViewBinding
 
-class KitchenTodayAdapter(var lists: List<Appointment>): RecyclerView.Adapter<KitchenTodayAdapter.ViewHolder>() {
+class BathroomTodayAdapter(var lists: List<Appointment>): RecyclerView.Adapter<BathroomTodayAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -72,7 +72,7 @@ class KitchenTodayAdapter(var lists: List<Appointment>): RecyclerView.Adapter<Ki
             binding.cell.setCardBackgroundColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    R.color.background_kitchen
+                    R.color.background_bathroom
                 )
             )
         }

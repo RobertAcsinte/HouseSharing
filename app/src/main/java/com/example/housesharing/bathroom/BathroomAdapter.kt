@@ -75,7 +75,7 @@ class BathroomAdapter(var lists: List<Appointment>, private val clickListener: O
             binding.cell.setCardBackgroundColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    R.color.background_kitchen
+                    R.color.background_bathroom
                 )
             )
         }
@@ -84,7 +84,7 @@ class BathroomAdapter(var lists: List<Appointment>, private val clickListener: O
             binding.cell.setCardBackgroundColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    R.color.background_kitchen_reserved
+                    R.color.background_bathroom_reserved
                 )
             )
         }

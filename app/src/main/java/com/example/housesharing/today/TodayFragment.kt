@@ -48,7 +48,7 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
         )
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarLoggedIn)
-        (activity as AppCompatActivity).title = "Schedule of the day"
+        (activity as AppCompatActivity).title = "Today"
 
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         navBar.visibility = View.VISIBLE
@@ -70,6 +70,15 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
                 val adapter = KitchenTodayAdapter(it.appointment!!)
                 binding.recyclerViewTodayKitchen.layoutManager = manager
                 binding.recyclerViewTodayKitchen.adapter = adapter
+            }
+        }
+
+        todayViewModel.fetchBathroom().observe(viewLifecycleOwner) {
+            if(it.exception == null){
+                val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+                val adapter = BathroomTodayAdapter(it.appointment!!)
+                binding.recyclerViewTodayBathroom.layoutManager = manager
+                binding.recyclerViewTodayBathroom.adapter = adapter
             }
         }
 

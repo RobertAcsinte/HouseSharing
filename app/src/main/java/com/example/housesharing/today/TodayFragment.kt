@@ -54,12 +54,22 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
         navBar.visibility = View.VISIBLE
 
         todayViewModel = ViewModelProvider(this).get(TodayViewModel::class.java)
+
         todayViewModel.fetchNotes().observe(viewLifecycleOwner) {
             if(it.exception == null){
                 val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 val adapter = NotesTodayAdapter(it.notes!!, this)
                 binding.recyclerViewTodayNotes.layoutManager = manager
                 binding.recyclerViewTodayNotes.adapter = adapter
+            }
+        }
+
+        todayViewModel.fetchKitchen().observe(viewLifecycleOwner) {
+            if(it.exception == null){
+                val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+                val adapter = KitchenTodayAdapter(it.appointment!!)
+                binding.recyclerViewTodayKitchen.layoutManager = manager
+                binding.recyclerViewTodayKitchen.adapter = adapter
             }
         }
 
@@ -82,57 +92,6 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
     override fun onItemClick(item: Note?) {
 
     }
-
-
-//    private fun print(noteResponse: NoteResponse) {
-//        noteResponse.notes?.let { products ->
-//            products.forEach{ product ->
-//                product.title?.let {
-//                    Log.d("PISAT", it)
-//                }
-//            }
-//        }
-//
-//        noteResponse.exception?.let { exception ->
-//            exception.message?.let {
-//                Log.d("PISAT", it)
-//            }
-//        }
-//    }
-//
-//    private fun getResponseUsingLiveData() {
-//        notesViewModel.getResponseUsingLiveData().observe(viewLifecycleOwner) {
-//            print(it)
-//            Log.d("sloboz", it.toString())
-//        }
-//    }
-//
-//    fun basicReadWrite() {
-//        // [START write_message]
-//        // Write a message to the database
-//        val database = Firebase.database
-//        val myRef = database.getReference("message")
-//
-//        myRef.setValue("Hello, World!")
-//        // [END write_message]
-//
-//        // [START read_message]
-//        // Read from the database
-//        myRef.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                val value = dataSnapshot.getValue<String>()
-//                Log.d(TAG, "Value is: $value")
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException())
-//            }
-//        })
-//        // [END read_message]
-//    }
 
 
 }

@@ -77,4 +77,36 @@ class KitchenRepository {
         }
         return mutableLiveData
     }
+
+    fun fetchReservationsToday(date: String, hour: Int): MutableLiveData<AppointmentResponse> {
+        val mutableLiveData = MutableLiveData<AppointmentResponse>()
+        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                task.result.value.toString()?.let {
+                    kitchenRef.child(it).child(date).get().addOnCompleteListener { snapshot ->
+                        val response = AppointmentResponse()
+                        if(snapshot.isSuccessful){
+                            val result = snapshot.result
+                            result?.let { snapshot ->
+                                for(d: DataSnapshot in snapshot.children){
+                                    var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
+                                        d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
+                                        d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
+                                        d.child("firstName").value.toString(), d.child("lastName").value.toString())
+                                    if(reservation.timeStartHour!! >= hour){
+                                        response.appointment!!.add(reservation)
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            response.exception = task.exception
+                        }
+                        mutableLiveData.value = response
+                    }
+                }
+            }
+        }
+        return mutableLiveData
+    }
 }

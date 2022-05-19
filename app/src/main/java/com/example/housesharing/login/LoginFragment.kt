@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentLoginBinding
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class LoginFragment : Fragment() {
@@ -34,6 +34,8 @@ class LoginFragment : Fragment() {
             false
         )
         (activity as AppCompatActivity).supportActionBar?.hide()
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility = View.GONE
 
 
         //Go to LoggedInFragment if the user is already logged in

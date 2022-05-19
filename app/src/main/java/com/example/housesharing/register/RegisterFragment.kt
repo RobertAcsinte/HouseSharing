@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentRegisterBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class RegisterFragment : Fragment() {
@@ -32,6 +33,8 @@ class RegisterFragment : Fragment() {
             false
         )
         (activity as AppCompatActivity).supportActionBar?.hide()
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility = View.GONE
 
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 

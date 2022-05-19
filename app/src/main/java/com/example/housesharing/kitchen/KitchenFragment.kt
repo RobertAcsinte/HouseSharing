@@ -1,16 +1,13 @@
 package com.example.housesharing.kitchen
 
 import android.annotation.SuppressLint
-import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.text.format.DateFormat
-import android.util.Log
 import android.view.*
-import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -200,23 +197,28 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
     //press on hour
     @SuppressLint("NotifyDataSetChanged")
     override fun onItemClick(item: Kitchen?) {
-        if (item != null) {
-            viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
-                viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
-                    if(it.exception == null){
-                        if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
-                            viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+        AlertDialog.Builder(requireContext())
+            .setMessage("Do you confirm making this booking?")
+            .setPositiveButton("Yes") { _, _ ->
+                if (item != null) {
+                    viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
+                        viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
+                            if(it.exception == null){
+                                if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
+                                    viewModel.updateList(it.kitchen!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
+                                } else{
+                                    viewModel.updateList(it.kitchen!!, 0)
+                                }
+                                hoursAdapter.notifyDataSetChanged()
+                            }
                         }
-                        else{
-                            viewModel.updateList(it.kitchen!!, 0)
-                        }
-                        hoursAdapter.notifyDataSetChanged()
                     }
-                }
                 }
                 calendarAdapter.notifyDataSetChanged()
 
-        }
+            }
+            .setNegativeButton("No", null).show()
+
     }
 
     //press on date

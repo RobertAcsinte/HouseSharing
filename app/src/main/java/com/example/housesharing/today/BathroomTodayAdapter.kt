@@ -44,12 +44,8 @@ class BathroomTodayAdapter(var lists: List<Appointment>): RecyclerView.Adapter<B
             }
         }
         holder.user.text = item.firstName.toString() + " " + item.lastName.toString()
-        if(item.userId  == null){
-            holder.user.text = "Available"
-        }
-        else{
-            holder.cell.isEnabled = false
-        }
+
+
         holder.color()
     }
 

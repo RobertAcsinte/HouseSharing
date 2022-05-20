@@ -2,6 +2,7 @@ package com.example.housesharing.bathroom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -70,6 +71,7 @@ class BathroomFragment : Fragment(), BathroomAdapter.OnItemClickListener, Calend
         }
 
         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
+            Log.d("PULA", selectedDay.toString())
             if(it.exception == null){
                 if(selectedDay == SimpleDateFormat("d", Locale.ENGLISH).format(cal.time).toString().toInt()){
                     viewModel.updateList(it.appointment!!, SimpleDateFormat("k", Locale.ENGLISH).format(cal.time).toString().toInt())
@@ -274,6 +276,7 @@ class BathroomFragment : Fragment(), BathroomAdapter.OnItemClickListener, Calend
                 else{
                     viewModel.updateList(it.appointment!!, 0)
                 }
+                hoursAdapter.notifyDataSetChanged()
             }
         }
         calendarAdapter.notifyDataSetChanged()

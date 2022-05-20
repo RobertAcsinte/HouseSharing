@@ -1,5 +1,6 @@
 package com.example.housesharing.bathroom
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,9 @@ class BathroomViewModel(private val repository: BathroomRepository = BathroomRep
     var listHours = ArrayList<Appointment>()
 
 
-    init { createList()
+    init
+    {
+        createList()
     }
 
     private fun createList(){
@@ -56,6 +59,7 @@ class BathroomViewModel(private val repository: BathroomRepository = BathroomRep
                 tempHours.add(it)
             }
         }
+
         listHoursLiveData.value = tempHours
     }
 

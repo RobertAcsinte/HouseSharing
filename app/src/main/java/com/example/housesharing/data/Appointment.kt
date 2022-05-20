@@ -6,7 +6,7 @@ data class Appointment (
     var timeStartMinute: Int? = null,
     var timeEndHour: Int? = null,
     var timeEndMinute: Int? = null,
-    var userId: String? = null,
+    var userId: String = "null",
     var firstName: String? = null,
     var lastName: String? = null
 )

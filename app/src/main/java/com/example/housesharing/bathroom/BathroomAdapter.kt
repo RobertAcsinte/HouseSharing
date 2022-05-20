@@ -1,6 +1,7 @@
 package com.example.housesharing.bathroom
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -47,15 +48,19 @@ class BathroomAdapter(var lists: List<Appointment>, private val clickListener: O
                 holder.time.text = item.timeStartHour.toString() + ":" + item.timeStartMinute.toString() + " - " + item.timeEndHour.toString() + ":" + item.timeEndMinute.toString() + "0"
             }
         }
-        holder.user.text = item.firstName.toString() + " " + item.lastName.toString()
-        if(item.userId  == null){
+
+        if(item.userId  == "null"){
             holder.user.text = "Available"
+            holder.cell.isEnabled = true
             holder.colorAvailable()
         }
         else{
+            holder.user.text = item.firstName.toString() + " " + item.lastName.toString()
             holder.cell.isEnabled = false
             holder.colorNotAvailable()
         }
+
+
         holder.cell.setOnClickListener {
             clickListener.onItemClick(lists[position])
         }

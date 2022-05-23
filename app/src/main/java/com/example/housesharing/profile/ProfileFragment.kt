@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,10 +36,14 @@ class ProfileFragment : Fragment() {
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         navBar.visibility = View.GONE
 
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
+        (activity as AppCompatActivity).title = "My Account"
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         profileViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
-                binding.textViewAccountEmail.text = user.email
+                //binding.textViewAccountEmail.text = user.email
             }
         })
 
@@ -50,7 +55,7 @@ class ProfileFragment : Fragment() {
         })
 
         profileViewModel.getData().observe(viewLifecycleOwner){
-            binding.textViewProfileHouse.text =it.account!!.houseId
+            //binding.textViewProfileHouse.text =it.account!!.houseId
         }
 
         logoutButton()

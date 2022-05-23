@@ -64,5 +64,6 @@
     <string name="there_are_no_pinned_notes">There are no pinned notes!</string>
     <string name="no_kitchen_appointments_today">No kitchen appointments today!</string>
     <string name="no_bathroom_appointments_today">No bathroom appointments today!</string>
+    <string name="log_out">Log Out</string>
 
 </resources>

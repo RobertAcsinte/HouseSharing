@@ -17,6 +17,7 @@ import com.example.housesharing.data.Appointment
 import com.example.housesharing.data.CalendarDateModel
 import com.example.housesharing.databinding.FragmentBathroomBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -239,9 +240,9 @@ class BathroomFragment : Fragment(), BathroomAdapter.OnItemClickListener, Calend
                 }
             }
 
-            AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setMessage("Confirm booking from $hourStart:$minuteStart to $hourEnd:$minuteEnd?")
-                .setPositiveButton("Yes") { _, _ ->
+                .setPositiveButton("Yes"){dialog, which ->
                     viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
                         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                             if(it.exception == null){
@@ -255,9 +256,11 @@ class BathroomFragment : Fragment(), BathroomAdapter.OnItemClickListener, Calend
                         }
                     }
                     calendarAdapter.notifyDataSetChanged()
-
                 }
-                .setNegativeButton("No", null).show()
+                .setNegativeButton("No"){dialog, which ->
+                }
+                .show()
+
         }
 
     }

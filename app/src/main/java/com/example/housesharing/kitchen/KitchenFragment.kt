@@ -3,6 +3,8 @@ package com.example.housesharing.kitchen
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -16,6 +18,7 @@ import com.example.housesharing.data.CalendarDateModel
 import com.example.housesharing.data.Appointment
 import com.example.housesharing.databinding.FragmentKitchenBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -237,10 +240,10 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
                     minuteEnd = item.timeEndMinute.toString() + "0"
                 }
             }
-
-            AlertDialog.Builder(requireContext())
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setMessage("Confirm booking from $hourStart:$minuteStart to $hourEnd:$minuteEnd?")
-                .setPositiveButton("Yes") { _, _ ->
+
+                .setPositiveButton("Yes"){dialog, which ->
                     viewModel.createReservation(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString(), item).observe(viewLifecycleOwner){
                         viewModel.fetchReservations(selectedDay.toString() + SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time).toString()).observe(viewLifecycleOwner){
                             if(it.exception == null){
@@ -254,9 +257,10 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
                         }
                     }
                     calendarAdapter.notifyDataSetChanged()
-
                 }
-                .setNegativeButton("No", null).show()
+                .setNegativeButton("No"){dialog, which ->
+                }
+                .show()
         }
 
     }

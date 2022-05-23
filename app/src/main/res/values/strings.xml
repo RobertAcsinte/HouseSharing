@@ -65,5 +65,9 @@
     <string name="no_kitchen_appointments_today">No kitchen appointments today!</string>
     <string name="no_bathroom_appointments_today">No bathroom appointments today!</string>
     <string name="log_out">Log Out</string>
+    <string name="pass_hint">********</string>
+    <string name="input">Input</string>
+    <string name="type_here">Type here...</string>
+    <string name="insert_the_new_value">Insert the new value....</string>
 
 </resources>

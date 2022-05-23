@@ -1,6 +1,7 @@
 package com.example.housesharing.data.source
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class AccountsRepository() {
@@ -19,6 +21,10 @@ class AccountsRepository() {
 
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    private val _accountInfoMutableLiveData = MutableLiveData<Account>()
+    val accountInfoMutableLiveData: LiveData<Account>
+        get() = _accountInfoMutableLiveData
 
     private val _userMutableLiveData = MutableLiveData<FirebaseUser>()
     val userMutableLiveData: LiveData<FirebaseUser>
@@ -115,5 +121,39 @@ class AccountsRepository() {
         return mutableLiveData
     }
 
+    fun fetchAccount() {
+        val listener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue<Account>()
+                _accountInfoMutableLiveData.value = user!!
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", error.toException())
+            }
+        }
+        accountRef.child(firebaseAuth.uid!!).addValueEventListener(listener)
+    }
+
+    fun updateFirstName(firstName: String): MutableLiveData<Boolean>{
+        val mutableLiveData = MutableLiveData<Boolean>()
+        accountRef.child(firebaseAuth.uid.toString()).child("firstName").setValue(firstName).addOnCompleteListener {
+            if(it.isSuccessful){
+                mutableLiveData.value = true
+            }
+        }
+        return mutableLiveData
+    }
+
+    fun updateLastName(lastName: String): MutableLiveData<Boolean>{
+        val mutableLiveData = MutableLiveData<Boolean>()
+        accountRef.child(firebaseAuth.uid.toString()).child("lastName").setValue(lastName).addOnCompleteListener {
+            if(it.isSuccessful){
+                mutableLiveData.value = true
+            }
+        }
+        return mutableLiveData
+    }
 
 }

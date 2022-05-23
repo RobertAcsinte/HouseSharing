@@ -16,4 +16,5 @@
     <color name="background_bathroom_reserved">#E3E2E0</color>
     <color name="background_button_week">#F3F2F2</color>
     <color name="background_button_week_selected">#ECF0FF</color>
+    <color name="color_log_out">#FF8A8A</color>
 </resources>

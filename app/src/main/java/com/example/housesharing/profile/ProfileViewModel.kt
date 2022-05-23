@@ -2,6 +2,7 @@ package com.example.housesharing.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.housesharing.data.Account
 import com.example.housesharing.data.AccountResponse
 import com.example.housesharing.data.source.AccountsRepository
 import com.google.firebase.auth.FirebaseUser
@@ -9,9 +10,9 @@ import com.google.firebase.auth.FirebaseUser
 class ProfileViewModel(private val repository: AccountsRepository = AccountsRepository()) :
     ViewModel() {
 
-    private var _userMutableLiveData = repository.userMutableLiveData
-    val userMutableLiveData: LiveData<FirebaseUser>
-        get() = _userMutableLiveData
+    private var _accountInfoMutableLiveData = repository.accountInfoMutableLiveData
+    val accountInfoMutableLiveData: LiveData<Account>
+        get() = _accountInfoMutableLiveData
 
     private var _loggedOutMutableLiveData = repository.loggedOutMutableLiveData
     val loggedOutMutableLiveData: LiveData<Boolean>
@@ -22,8 +23,17 @@ class ProfileViewModel(private val repository: AccountsRepository = AccountsRepo
         repository.logOut()
     }
 
-    fun getData(): LiveData<AccountResponse>{
-        return repository.accountData()
+
+    fun updateFirstName(firstName: String): LiveData<Boolean>{
+        return repository.updateFirstName(firstName)
+    }
+
+    fun updateLastName(lastName: String): LiveData<Boolean>{
+        return repository.updateLastName(lastName)
+    }
+
+    fun fetch(){
+        repository.fetchAccount()
     }
 
 }

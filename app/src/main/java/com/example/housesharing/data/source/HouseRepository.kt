@@ -14,7 +14,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-
+import kotlin.Exception
 
 
 class HouseRepository {
@@ -26,7 +26,7 @@ class HouseRepository {
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    private val _houseInfoMutableLiveData = MutableLiveData<House>()
+    private var _houseInfoMutableLiveData = MutableLiveData<House>()
     val houseInfoMutableLiveData: LiveData<House>
         get() = _houseInfoMutableLiveData
 
@@ -70,6 +70,74 @@ class HouseRepository {
 
         return mutableLiveData
     }
+
+
+    fun houseData(): MutableLiveData<Exception>{
+        val mutableLiveData = MutableLiveData<Exception>()
+        var house = House()
+
+        //get house id
+        userRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
+            val houseId: String
+            if (task.isSuccessful) {
+                val result = task.result
+                result?.let {
+                    houseId = it.child("houseId").value.toString()
+                    house.id = houseId
+                    Log.d("CASA", houseId)
+
+                    //get house name
+                    val listener = object : ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            house.name = snapshot.child("name").value.toString()
+                            house.members.clear()
+
+                            //Get the first name and the last name of the members
+                            snapshot.child("members").children.forEach { userId ->
+                                val listenerMembers = object : ValueEventListener{
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        house.members.add(snapshot.child("firstName").value.toString() + " " + snapshot.child("lastName").value.toString())
+                                        _houseInfoMutableLiveData.value = house
+                                    }
+                                    override fun onCancelled(error: DatabaseError) {
+                                        TODO("Not yet implemented")
+                                    }
+                                }
+                                userRef.child(userId.key.toString()).addListenerForSingleValueEvent(listenerMembers)
+                            }
+
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    }
+                    houseRef.child(houseId).addValueEventListener(listener)
+                }
+            }
+            mutableLiveData.value = task.exception
+        }
+        return mutableLiveData
+    }
+
+    fun getHouseName(id: String): MutableLiveData<Exception>{
+        val mutableLiveData = MutableLiveData<Exception>()
+
+        val listener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                _houseInfoMutableLiveData.value!!.name = snapshot.child("name").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        houseRef.child(id).addValueEventListener(listener)
+
+        return mutableLiveData
+    }
+
 
 
     fun fetchHouse() {

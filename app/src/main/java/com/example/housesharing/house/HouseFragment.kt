@@ -1,5 +1,6 @@
 package com.example.housesharing.house
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ class HouseFragment : Fragment() {
 
     private lateinit var houseViewModel: HouseViewModel
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,14 +48,20 @@ class HouseFragment : Fragment() {
 
 
         houseViewModel = ViewModelProvider(this).get(HouseViewModel::class.java)
-        houseViewModel.fetchHouse()
 
         houseViewModel.houseInfoMutableLiveData.observe(viewLifecycleOwner){
+            //list members
             val manager = LinearLayoutManager(activity)
             val adapter = MembersAdapter(it.members)
             binding.recyclerViewListMembers.layoutManager = manager
             binding.recyclerViewListMembers.adapter = adapter
+
+            //house name and id
+            binding.textViewHouseNameMyHouse.text = it.name.toString()
+            binding.textViewHouseIdMyHouse.text = "(# " + it.id.toString() + ")"
         }
+
+        houseViewModel.dataHouse()
 
         return binding.root
     }

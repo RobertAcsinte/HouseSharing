@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -99,8 +100,12 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         navBar.visibility = View.VISIBLE
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         inflater.inflate(R.menu.options_menu, menu)
     }
 

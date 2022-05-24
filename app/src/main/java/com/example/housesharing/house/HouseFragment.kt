@@ -71,7 +71,7 @@ class HouseFragment : Fragment() {
         return binding.root
     }
 
-    fun changeName(){
+    private fun changeName(){
         binding.buttonEditHouseName.setOnClickListener {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
             val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)

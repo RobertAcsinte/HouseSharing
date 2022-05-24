@@ -123,4 +123,14 @@
         android:id="@+id/bathroomFragment"
         android:name="com.example.housesharing.bathroom.BathroomFragment"
         android:label="BathroomFragment" />
+    <fragment
+        android:id="@+id/houseFragment"
+        android:name="com.example.housesharing.house.HouseFragment"
+        android:label="HouseFragment" >
+        <action
+            android:id="@+id/action_houseFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

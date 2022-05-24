@@ -17,4 +17,7 @@
     <color name="background_button_week">#324869</color>
     <color name="background_button_week_selected">#5C6793</color>
     <color name="color_log_out">#B13A3A</color>
+    <color name="color_house_id">#E1D5D5</color>
+    <color name="color_member_list_even">#5C6793</color>
+    <color name="color_member_list_odd">#40496B</color>
 </resources>

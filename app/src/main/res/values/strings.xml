@@ -70,5 +70,12 @@
     <string name="type_here">Type here...</string>
     <string name="insert_the_new_value">Insert the new value....</string>
     <string name="type_your_password">Type your password...</string>
+    <string name="house">House</string>
+    <string name="house_id">(house id)</string>
+    <string name="members">Members</string>
+    <string name="invite">Invite</string>
+    <string name="type_the_name_or_the_id">Type the name or the id</string>
+    <string name="leave">Leave</string>
+    <string name="firstname_lastname">FirstName LastName</string>
 
 </resources>

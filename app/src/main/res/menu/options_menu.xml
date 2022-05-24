@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <menu xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/accountFragment"
-        android:icon="@android:drawable/btn_star"
-        android:title="@string/account" />
-</menu>
+        android:id="@+id/houseFragment"
+        android:icon="@drawable/house_48"
+        android:title="@string/house" />
+
+        <item
+            android:id="@+id/accountFragment"
+            android:icon="@drawable/account_48"
+            android:title="@string/account"
+            app:showAsAction="never" />
+
+    </menu>
+
+

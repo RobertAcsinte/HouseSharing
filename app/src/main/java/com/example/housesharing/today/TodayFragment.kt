@@ -1,33 +1,20 @@
 package com.example.housesharing.today
 
-import android.content.ContentValues.TAG
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.housesharing.R
 import com.example.housesharing.data.Note
-import com.example.housesharing.data.NoteResponse
 import com.example.housesharing.databinding.FragmentTodayBinding
-import com.example.housesharing.notes.NotesAdapter
-import com.example.housesharing.notes.NotesViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 
 
 class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
@@ -111,8 +98,12 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
         return binding.root
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         inflater.inflate(R.menu.options_menu, menu)
     }
 

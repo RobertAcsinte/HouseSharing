@@ -18,8 +18,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentProfileBinding
+import com.example.housesharing.main.Firebase
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthActionCodeException
+import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
 import java.util.*
 
 
@@ -63,6 +68,8 @@ class ProfileFragment : Fragment() {
 
         firstNameEdit()
         lastNameEdit()
+        reAuth()
+        //emailEdit()
 
         return binding.root
     }
@@ -130,6 +137,71 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun emailEdit(){
+        val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
+        var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+            .setView(customDialogLayout)
+            .setTitle("Email")
+            .setPositiveButton("Save"){dialog, which ->
+            }
+            .setNegativeButton("Cancel"){dialog, which ->
+
+            }
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+            if(editText.text.isEmpty()){
+                Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                profileViewModel.updateEmail(editText.text.toString()).observe(viewLifecycleOwner){
+                    if(it == null){
+                        dialog.dismiss()
+                    }
+                    else{
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun reAuth(){
+        binding.buttonEditProfileEmail.setOnClickListener {
+            val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_auth_password, null)
+            var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setView(customDialogLayout)
+                .setTitle("Please type your password")
+                .setPositiveButton("Done"){dialog, which ->
+                }
+                .setNegativeButton("Cancel"){dialog, which ->
+
+                }
+                .show()
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValuePassword)
+                if(editText.text.isEmpty()){
+                    Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+                    val user = firebaseAuth.currentUser
+                    val credential = EmailAuthProvider
+                        .getCredential(profileViewModel.accountInfoMutableLiveData.value?.email!!, editText.text.toString())
+                    user!!.reauthenticate(credential)
+                        .addOnCompleteListener {
+                            if(it.isSuccessful){
+                                dialog.dismiss()
+                                emailEdit()
+                            }
+                            else{
+                                Toast.makeText(context, it.exception!!.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                }
+            }
+        }
+    }
 
 
 }

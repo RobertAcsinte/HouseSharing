@@ -156,4 +156,19 @@ class AccountsRepository() {
         return mutableLiveData
     }
 
+    fun updateEmail(email: String): MutableLiveData<Exception>{
+        val mutableLiveData = MutableLiveData<Exception>()
+        firebaseAuth.currentUser!!.updateEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                accountRef.child(firebaseAuth.uid.toString()).child("email").setValue(email).addOnCompleteListener {
+                    mutableLiveData.value = it.exception
+                }
+            }
+            else{
+                mutableLiveData.value = task.exception
+            }
+        }
+        return mutableLiveData
+    }
+
 }

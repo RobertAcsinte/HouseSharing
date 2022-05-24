@@ -36,4 +36,8 @@ class ProfileViewModel(private val repository: AccountsRepository = AccountsRepo
         repository.fetchAccount()
     }
 
+    fun updateEmail(email: String): LiveData<Exception>{
+        return repository.updateEmail(email)
+    }
+
 }

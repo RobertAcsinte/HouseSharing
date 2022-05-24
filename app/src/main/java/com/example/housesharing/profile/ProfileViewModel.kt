@@ -40,4 +40,7 @@ class ProfileViewModel(private val repository: AccountsRepository = AccountsRepo
         return repository.updateEmail(email)
     }
 
+    fun updatePassword(password: String): LiveData<Exception>{
+        return repository.updatePassword(password)
+    }
 }

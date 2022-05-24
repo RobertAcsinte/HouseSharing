@@ -171,4 +171,12 @@ class AccountsRepository() {
         return mutableLiveData
     }
 
+    fun updatePassword(password: String): MutableLiveData<Exception>{
+        val mutableLiveData = MutableLiveData<Exception>()
+        firebaseAuth.currentUser!!.updatePassword(password).addOnCompleteListener { task ->
+            mutableLiveData.value = task.exception
+        }
+        return mutableLiveData
+    }
+
 }

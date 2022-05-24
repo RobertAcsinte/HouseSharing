@@ -1,9 +1,6 @@
 package com.example.housesharing.profile
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentProfileBinding
-import com.example.housesharing.main.Firebase
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthActionCodeException
-import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
-import java.util.*
 
 
 class ProfileFragment : Fragment() {
@@ -68,8 +61,8 @@ class ProfileFragment : Fragment() {
 
         firstNameEdit()
         lastNameEdit()
-        reAuth()
-        //emailEdit()
+        changeEmail()
+        changePassword()
 
         return binding.root
     }
@@ -137,7 +130,45 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun emailEdit(){
+
+    private fun changeEmail(){
+        binding.buttonEditProfileEmail.setOnClickListener {
+            val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_auth_password, null)
+            var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setView(customDialogLayout)
+                .setTitle("Please type your password")
+                .setPositiveButton("Done"){dialog, which ->
+                }
+                .setNegativeButton("Cancel"){dialog, which ->
+
+                }
+                .show()
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValuePassword)
+                if(editText.text.isEmpty()){
+                    Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+                    val user = firebaseAuth.currentUser
+                    val credential = EmailAuthProvider
+                        .getCredential(profileViewModel.accountInfoMutableLiveData.value?.email!!, editText.text.toString())
+                    user!!.reauthenticate(credential)
+                        .addOnCompleteListener {
+                            if(it.isSuccessful){
+                                dialog.dismiss()
+                                emailEditDb()
+                            }
+                            else{
+                                Toast.makeText(context, it.exception!!.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                }
+            }
+        }
+    }
+
+    private fun emailEditDb(){
         val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
         var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
             .setView(customDialogLayout)
@@ -166,8 +197,8 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun reAuth(){
-        binding.buttonEditProfileEmail.setOnClickListener {
+    private fun changePassword(){
+        binding.buttonEditProfilePassword.setOnClickListener {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_auth_password, null)
             var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setView(customDialogLayout)
@@ -192,7 +223,7 @@ class ProfileFragment : Fragment() {
                         .addOnCompleteListener {
                             if(it.isSuccessful){
                                 dialog.dismiss()
-                                emailEdit()
+                                passwordEditDb()
                             }
                             else{
                                 Toast.makeText(context, it.exception!!.message, Toast.LENGTH_SHORT).show()
@@ -203,5 +234,39 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun passwordEditDb(){
+        val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_change_password, null)
+        var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+            .setView(customDialogLayout)
+            .setTitle("Reset your password")
+            .setPositiveButton("Save"){dialog, which ->
+            }
+            .setNegativeButton("Cancel"){dialog, which ->
+
+            }
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val editTextPassword = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValuePasswordReset)
+            val editTextPasswordRepeat = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValuePasswordResetRepeat)
+            if(editTextPassword.text.isEmpty() || editTextPasswordRepeat.text.isEmpty()){
+                Toast.makeText(context, "Please complete all the fields!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(editTextPassword.text.toString() != editTextPasswordRepeat.text.toString()){
+                    Toast.makeText(context, "Passwords don't match!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    profileViewModel.updatePassword(editTextPassword.text.toString()).observe(viewLifecycleOwner){
+                        if(it == null){
+                            dialog.dismiss()
+                        }
+                        else{
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

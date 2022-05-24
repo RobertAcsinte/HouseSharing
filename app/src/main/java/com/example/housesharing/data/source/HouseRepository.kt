@@ -84,7 +84,6 @@ class HouseRepository {
                 result?.let {
                     houseId = it.child("houseId").value.toString()
                     house.id = houseId
-                    Log.d("CASA", houseId)
 
                     //get house name
                     val listener = object : ValueEventListener{
@@ -120,68 +119,26 @@ class HouseRepository {
         return mutableLiveData
     }
 
-    fun getHouseName(id: String): MutableLiveData<Exception>{
+
+    fun changeName(name: String): MutableLiveData<Exception>{
         val mutableLiveData = MutableLiveData<Exception>()
-
-        val listener = object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                _houseInfoMutableLiveData.value!!.name = snapshot.child("name").value.toString()
+        //get house id
+        userRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                houseRef.child(task.result.child("houseId").value.toString()) .child("name").setValue(name).addOnCompleteListener {
+                    _houseInfoMutableLiveData.value!!.name = name
+                }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
         }
-        houseRef.child(id).addValueEventListener(listener)
 
         return mutableLiveData
     }
 
 
 
-    fun fetchHouse() {
-        val response = HouseResponse()
 
-        //Get the house ID of the logged user
-        val listenerUser = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user = snapshot.getValue<Account>()
 
-                //Get the house name and the id's of the members
-                val listenerHouse = object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        response.house = House()
-                        response.house!!.name = snapshot.child("name").value.toString()
-                        snapshot.child("members").children.forEach { userId ->
 
-                            //Get the first name and the last name of the members
-                            val listenerMembers = object : ValueEventListener{
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    response.house!!.members.add(snapshot.child("firstName").value.toString() + " " + snapshot.child("lastName").value.toString())
-                                    _houseInfoMutableLiveData.value = response.house
-                                }
-                                override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
-                                }
-                            }
-                            userRef.child(userId.key.toString()).addValueEventListener(listenerMembers)
-
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                }
-                houseRef.child(user!!.houseId!!).addValueEventListener(listenerHouse)
-            }
-            override fun onCancelled(error: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(ContentValues.TAG, "loadPost:onCancelled", error.toException())
-            }
-        }
-        userRef.child(firebaseAuth.uid!!).addValueEventListener(listenerUser)
-    }
 
 
 }

@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +21,7 @@ import com.example.housesharing.databinding.FragmentKitchenBinding
 import com.example.housesharing.profile.ProfileViewModel
 import com.example.housesharing.today.NotesTodayAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class HouseFragment : Fragment() {
@@ -62,8 +66,34 @@ class HouseFragment : Fragment() {
         }
 
         houseViewModel.dataHouse()
+        changeName()
 
         return binding.root
+    }
+
+    fun changeName(){
+        binding.buttonEditHouseName.setOnClickListener {
+            val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
+            val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+            editText.setText(houseViewModel.houseInfoMutableLiveData.value!!.name)
+            var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setView(customDialogLayout)
+                .setTitle("House Name")
+                .setPositiveButton("Save"){dialog, which ->
+                }
+                .setNegativeButton("Cancel"){dialog, which ->
+                }
+                .show()
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                if(editText.text.isEmpty()){
+                    Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    houseViewModel.changeName(editText.text.toString())
+                    dialog.dismiss()
+                }
+            }
+        }
     }
 
 

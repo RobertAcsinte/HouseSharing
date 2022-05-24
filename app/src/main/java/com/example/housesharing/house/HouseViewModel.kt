@@ -15,4 +15,8 @@ class HouseViewModel (private val repository: HouseRepository = HouseRepository(
     fun dataHouse(){
         repository.houseData()
     }
+
+    fun changeName(name: String){
+        repository.changeName(name)
+    }
 }

@@ -83,22 +83,23 @@ class ProfileFragment : Fragment() {
     private fun firstNameEdit(){
         binding.buttonEditProfileFirstName.setOnClickListener {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
+            val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+            editText.setText(profileViewModel.accountInfoMutableLiveData.value!!.firstName)
             var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setView(customDialogLayout)
                 .setTitle("First Name")
                 .setPositiveButton("Save"){dialog, which ->
                 }
                 .setNegativeButton("Cancel"){dialog, which ->
-
                 }
                 .show()
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+
                 if(editText.text.isEmpty()){
                     Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    profileViewModel.updateFirstName(editText.text.toString())
+                    profileViewModel.updateFirstName(editText.text.toString().replaceFirstChar { it.uppercase() })
                     dialog.dismiss()
                 }
             }
@@ -108,22 +109,22 @@ class ProfileFragment : Fragment() {
     private fun lastNameEdit(){
         binding.buttonEditProfileLastName.setOnClickListener {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
+            val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+            editText.setText(profileViewModel.accountInfoMutableLiveData.value!!.lastName)
             var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setView(customDialogLayout)
                 .setTitle("Last Name")
                 .setPositiveButton("Save"){dialog, which ->
                 }
                 .setNegativeButton("Cancel"){dialog, which ->
-
                 }
                 .show()
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
                 if(editText.text.isEmpty()){
                     Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    profileViewModel.updateLastName(editText.text.toString())
+                    profileViewModel.updateLastName(editText.text.toString().replaceFirstChar { it.uppercase() })
                     dialog.dismiss()
                 }
             }
@@ -170,6 +171,8 @@ class ProfileFragment : Fragment() {
 
     private fun emailEditDb(){
         val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_profile, null)
+        val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
+        editText.setText(profileViewModel.accountInfoMutableLiveData.value!!.email)
         var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
             .setView(customDialogLayout)
             .setTitle("Email")
@@ -180,7 +183,6 @@ class ProfileFragment : Fragment() {
             }
             .show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val editText = customDialogLayout.findViewById<EditText>(R.id.editTextDialogValue)
             if(editText.text.isEmpty()){
                 Toast.makeText(context, "Please complete the field!", Toast.LENGTH_SHORT).show()
             }

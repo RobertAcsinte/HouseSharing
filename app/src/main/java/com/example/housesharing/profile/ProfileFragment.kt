@@ -77,7 +77,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logoutButton(){
-        binding.buttonAccountLogOut.setOnClickListener { profileViewModel.logOut() }
+        binding.buttonAccountLogOut.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setMessage("Confirm logging out?")
+                .setPositiveButton("Yes"){dialog, which ->
+                    profileViewModel.logOut()
+                }
+                .setNegativeButton("No"){dialog, which ->
+                }
+                .show()
+        }
     }
 
     private fun firstNameEdit(){

@@ -14,6 +14,9 @@ import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentDetailsNoteBinding
 import com.example.housesharing.noHouse.NoHouseViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DetailsNoteFragment : Fragment() {
@@ -64,9 +67,16 @@ class DetailsNoteFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.deleteNote) {
-            viewModel.deleteNote(viewModel.noteId.value.toString()).observe(viewLifecycleOwner){
-                view?.findNavController()?.popBackStack()
-            }
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setMessage("Confirm deleting?")
+                .setPositiveButton("Yes"){dialog, which ->
+                    viewModel.deleteNote(viewModel.noteId.value.toString()).observe(viewLifecycleOwner){
+                        view?.findNavController()?.popBackStack()
+                    }
+                }
+                .setNegativeButton("No"){dialog, which ->
+                }
+                .show()
         }
         if (item.itemId == R.id.editNote) {
             viewModel.editNote(viewModel.noteId.value.toString(),
@@ -74,7 +84,9 @@ class DetailsNoteFragment : Fragment() {
                 view?.findNavController()?.popBackStack()
             }
         }
+
         return super.onOptionsItemSelected(item);
     }
+
 
 }

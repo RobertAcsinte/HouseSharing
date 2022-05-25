@@ -54,7 +54,8 @@ class HouseRepository {
         val mutableLiveData = MutableLiveData<HouseResponse>()
         var generatedKey = houseRef.push().key
         if (generatedKey != null) {
-            houseId = generatedKey
+            //get the last 6 generated characters
+            generatedKey = generatedKey.substring(generatedKey.length - 6, generatedKey.length)
         }
         val response = HouseResponse()
         houseRef.child(generatedKey!!).child("members").child(firebaseAuth.uid!!).setValue(true).addOnFailureListener {

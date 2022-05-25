@@ -65,13 +65,13 @@ class DetailsNoteFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.deleteNote) {
             viewModel.deleteNote(viewModel.noteId.value.toString()).observe(viewLifecycleOwner){
-                view?.findNavController()?.navigate(R.id.action_detailsNoteFragment_to_notesFragment2)
+                view?.findNavController()?.popBackStack()
             }
         }
         if (item.itemId == R.id.editNote) {
             viewModel.editNote(viewModel.noteId.value.toString(),
                     binding.editTextTextNoteDetailsTitle.text.toString(), binding.editTextTextNoteDetailsContent.text.toString()).observe(viewLifecycleOwner){
-                view?.findNavController()?.navigate(R.id.action_detailsNoteFragment_to_notesFragment2)
+                view?.findNavController()?.popBackStack()
             }
         }
         return super.onOptionsItemSelected(item);

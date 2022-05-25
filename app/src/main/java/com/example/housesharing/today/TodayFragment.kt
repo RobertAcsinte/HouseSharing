@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.housesharing.R
 import com.example.housesharing.data.Note
 import com.example.housesharing.databinding.FragmentTodayBinding
+import com.example.housesharing.notes.NotesFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -115,7 +116,8 @@ class TodayFragment : Fragment(), NotesTodayAdapter.OnItemClickListener {
 
     //notes
     override fun onItemClick(item: Note?) {
-
+        val action = TodayFragmentDirections.actionTodayFragmentToDetailsNoteFragment(item!!)
+        view?.findNavController()?.navigate(action)
     }
 
 

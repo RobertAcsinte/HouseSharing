@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_todayFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <action
+            android:id="@+id/action_todayFragment_to_detailsNoteFragment"
+            app:destination="@id/detailsNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -77,7 +80,7 @@
         <action
             android:id="@+id/action_loadFragment_to_noHouseFragment"
             app:destination="@id/noHouseFragment"
-            app:popUpTo="@id/nav_graph"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

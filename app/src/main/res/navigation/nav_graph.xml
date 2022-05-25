@@ -77,7 +77,7 @@
         <action
             android:id="@+id/action_loadFragment_to_noHouseFragment"
             app:destination="@id/noHouseFragment"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -130,6 +130,11 @@
         <action
             android:id="@+id/action_houseFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_houseFragment_to_loadFragment"
+            app:destination="@id/loadFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>

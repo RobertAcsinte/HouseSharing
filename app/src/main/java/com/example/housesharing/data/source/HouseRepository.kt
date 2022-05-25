@@ -119,13 +119,29 @@ class HouseRepository {
         return mutableLiveData
     }
 
+    fun leaveHouse(): MutableLiveData<Boolean> {
+        val mutableLiveData = MutableLiveData<Boolean>()
+        userRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val result = task.result
+                result?.let {
+                    userRef.child(firebaseAuth.uid.toString()).child("houseId").setValue(null)
+                    houseRef.child(it.value.toString()).child("members").setValue(null).addOnCompleteListener {
+                        mutableLiveData.value = true
+                    }
+                }
+            }
+        }
+        return mutableLiveData
+    }
+
 
     fun changeName(name: String): MutableLiveData<Exception>{
         val mutableLiveData = MutableLiveData<Exception>()
         //get house id
         userRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
             if(task.isSuccessful){
-                houseRef.child(task.result.child("houseId").value.toString()) .child("name").setValue(name).addOnCompleteListener {
+                houseRef.child(task.result.child("houseId").value.toString()).child("name").setValue(name).addOnCompleteListener {
                     _houseInfoMutableLiveData.value!!.name = name
                 }
             }

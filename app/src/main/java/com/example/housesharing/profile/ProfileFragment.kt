@@ -137,7 +137,8 @@ class ProfileFragment : Fragment() {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_auth_password, null)
             var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setView(customDialogLayout)
-                .setTitle("Please type your password")
+                .setTitle("Change your email")
+                .setMessage("Your password is needed for this action")
                 .setPositiveButton("Done"){dialog, which ->
                 }
                 .setNegativeButton("Cancel"){dialog, which ->
@@ -204,7 +205,8 @@ class ProfileFragment : Fragment() {
             val customDialogLayout: View = layoutInflater.inflate(R.layout.dialog_auth_password, null)
             var dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                 .setView(customDialogLayout)
-                .setTitle("Please type your password")
+                .setTitle("Change your password")
+                .setMessage("Your password is needed for this action")
                 .setPositiveButton("Done"){dialog, which ->
                 }
                 .setNegativeButton("Cancel"){dialog, which ->

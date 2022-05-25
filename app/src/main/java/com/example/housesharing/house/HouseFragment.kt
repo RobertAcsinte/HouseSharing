@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.housesharing.R
@@ -67,6 +68,7 @@ class HouseFragment : Fragment() {
 
         houseViewModel.dataHouse()
         changeName()
+        leaveHouse()
 
         return binding.root
     }
@@ -96,5 +98,12 @@ class HouseFragment : Fragment() {
         }
     }
 
+    private fun leaveHouse(){
+        binding.buttonLeaveHouse.setOnClickListener {
+            houseViewModel.leaveHouse().observe(viewLifecycleOwner){
+                view?.findNavController()?.navigate(R.id.action_houseFragment_to_loadFragment)
+            }
+        }
+    }
 
 }

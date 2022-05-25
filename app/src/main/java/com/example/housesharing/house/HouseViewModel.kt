@@ -1,6 +1,7 @@
 package com.example.housesharing.house
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.housesharing.data.House
 import com.example.housesharing.data.source.HouseRepository
@@ -18,5 +19,9 @@ class HouseViewModel (private val repository: HouseRepository = HouseRepository(
 
     fun changeName(name: String){
         repository.changeName(name)
+    }
+
+    fun leaveHouse(): MutableLiveData<Boolean>{
+        return repository.leaveHouse()
     }
 }

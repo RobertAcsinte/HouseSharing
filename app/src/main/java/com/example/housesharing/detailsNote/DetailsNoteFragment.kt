@@ -59,7 +59,7 @@ class DetailsNoteFragment : Fragment() {
         if (menu is MenuBuilder) {
             menu.setOptionalIconsVisible(true)
         }
-        inflater.inflate(R.menu.options_menu, menu)
+        inflater.inflate(R.menu.notes_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

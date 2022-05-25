@@ -53,7 +53,8 @@
             android:textColor="@color/color_house_id"
             app:layout_constraintBottom_toBottomOf="@+id/textViewHouseNameMyHouse"
             app:layout_constraintStart_toEndOf="@+id/textViewHouseNameMyHouse"
-            app:layout_constraintTop_toTopOf="@+id/textViewHouseNameMyHouse" />
+            app:layout_constraintTop_toTopOf="@+id/textViewHouseNameMyHouse"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/buttonEditHouseName"
@@ -61,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@string/edit"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewHouseNameMyHouse"
+            app:layout_constraintBottom_toBottomOf="@+id/textView14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView14" />
 

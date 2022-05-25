@@ -38,7 +38,7 @@
             style="@style/ButtonWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:minWidth="52dp"
             android:text="@string/arrow_left"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
             android:minWidth="52dp"
             android:text="@string/arrow_right"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDateBathroom"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"

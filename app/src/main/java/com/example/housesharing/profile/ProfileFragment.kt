@@ -1,18 +1,19 @@
 package com.example.housesharing.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -45,6 +46,7 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
         (activity as AppCompatActivity).title = "My Account"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
 
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
@@ -67,6 +69,21 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.
+        onNavDestinationSelected(item,requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
+
     private fun fetchData(){
         profileViewModel.fetch()
         profileViewModel.accountInfoMutableLiveData.observe(viewLifecycleOwner){
@@ -79,7 +96,7 @@ class ProfileFragment : Fragment() {
     private fun logoutButton(){
         binding.buttonAccountLogOut.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                .setMessage("Confirm logging out?")
+                .setTitle("Confirm logging out?")
                 .setPositiveButton("Yes"){dialog, which ->
                     profileViewModel.logOut()
                 }

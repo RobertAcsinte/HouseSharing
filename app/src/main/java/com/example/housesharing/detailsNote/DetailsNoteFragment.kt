@@ -43,6 +43,7 @@ class DetailsNoteFragment : Fragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
         (activity as AppCompatActivity).title = ""
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.editTextTextNoteDetailsTitle.setText(viewModel.noteTitle.value)
         binding.editTextTextNoteDetailsContent.setText(viewModel.noteContent.value)
@@ -68,7 +69,7 @@ class DetailsNoteFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.deleteNote) {
             MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                .setMessage("Confirm deleting?")
+                .setTitle("Confirm deleting?")
                 .setPositiveButton("Yes"){dialog, which ->
                     viewModel.deleteNote(viewModel.noteId.value.toString()).observe(viewLifecycleOwner){
                         view?.findNavController()?.popBackStack()

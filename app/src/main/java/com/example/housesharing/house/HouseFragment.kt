@@ -3,17 +3,17 @@ package com.example.housesharing.house
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.housesharing.R
@@ -50,6 +50,7 @@ class HouseFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
         (activity as AppCompatActivity).title = "My House"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
 
 
         houseViewModel = ViewModelProvider(this).get(HouseViewModel::class.java)
@@ -63,7 +64,7 @@ class HouseFragment : Fragment() {
 
             //house name and id
             binding.textViewHouseNameMyHouse.text = it.name.toString()
-            binding.textViewHouseIdMyHouse.text = "(# " + it.id.toString() + ")"
+            binding.textViewHouseIdMyHouse.text = "(#" + it.id.toString() + ")"
         }
 
         houseViewModel.dataHouse()
@@ -71,6 +72,21 @@ class HouseFragment : Fragment() {
         leaveHouse()
 
         return binding.root
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.
+        onNavDestinationSelected(item,requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
     private fun changeName(){

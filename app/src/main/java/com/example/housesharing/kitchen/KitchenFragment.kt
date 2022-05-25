@@ -169,7 +169,7 @@ class KitchenFragment : Fragment(), KitchenAdapter.OnItemClickListener, Calendar
         dates.clear()
         //current calendar month
         val calCurrent = Calendar.getInstance(Locale.ENGLISH)
-        if(SimpleDateFormat("M", Locale.ENGLISH).format(calCurrent.time) == SimpleDateFormat("M", Locale.ENGLISH).format(cal.time)){
+        if(SimpleDateFormat("Myy", Locale.ENGLISH).format(calCurrent.time) == SimpleDateFormat("Myy", Locale.ENGLISH).format(cal.time)){
             binding.buttonPreviousMonthKitchen.isEnabled = false
             monthCalendar.set(Calendar.DAY_OF_MONTH, SimpleDateFormat("d", Locale.ENGLISH).format(calCurrent.time).toString().toInt())
             selectedDay = SimpleDateFormat("d", Locale.ENGLISH).format(calCurrent.time).toString().toInt()

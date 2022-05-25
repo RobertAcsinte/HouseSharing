@@ -29,8 +29,7 @@ class BathroomViewModel(private val repository: BathroomRepository = BathroomRep
             listHours.add(Appointment(id, hour, 30, hour + 1, 0))
             id++
         }
-        listHoursLiveData.value = listHours
-
+        //listHoursLiveData.value = listHours
     }
 
     fun createReservation(date: String, appointment: Appointment): LiveData<Boolean> {

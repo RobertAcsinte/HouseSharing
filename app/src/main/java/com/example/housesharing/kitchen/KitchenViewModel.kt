@@ -13,7 +13,8 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
     var listHours = ArrayList<Appointment>()
 
 
-    init { createList()
+    init {
+        createList()
     }
 
     private fun createList(){
@@ -25,8 +26,7 @@ class KitchenViewModel(private val repository: KitchenRepository = KitchenReposi
             listHours.add(Appointment(id, hour, 30, hour + 1, 0))
             id++
         }
-        listHoursLiveData.value = listHours
-
+        //listHoursLiveData.value = listHours
     }
 
     fun createReservation(date: String, appointment: Appointment): LiveData<Boolean> {

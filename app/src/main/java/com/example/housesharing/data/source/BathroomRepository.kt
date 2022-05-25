@@ -80,10 +80,10 @@ class BathroomRepository {
 
     fun fetchReservationsToday(date: String, hour: Int): MutableLiveData<AppointmentResponse> {
         val mutableLiveData = MutableLiveData<AppointmentResponse>()
-        accountRef.child(firebaseAuth.uid.toString()).child("houseId").get().addOnCompleteListener { task ->
+        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                task.result.value.toString()?.let {
-                    bathroomRef.child(it).child(date).get().addOnCompleteListener { snapshot ->
+                task.result.let { user ->
+                    bathroomRef.child(user.child("houseId").value.toString()).child(date).get().addOnCompleteListener { snapshot ->
                         val response = AppointmentResponse()
                         if(snapshot.isSuccessful){
                             val result = snapshot.result
@@ -92,7 +92,7 @@ class BathroomRepository {
                                     var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
                                         d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
                                         d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
-                                        d.child("firstName").value.toString(), d.child("lastName").value.toString())
+                                        user.child("firstName").value.toString(), user.child("lastName").value.toString())
                                     if(reservation.timeStartHour!! >= hour){
                                         response.appointment!!.add(reservation)
                                     }

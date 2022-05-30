@@ -4,23 +4,20 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.housesharing.R
 import com.example.housesharing.databinding.FragmentHouseBinding
-import com.example.housesharing.databinding.FragmentKitchenBinding
-import com.example.housesharing.profile.ProfileViewModel
-import com.example.housesharing.today.NotesTodayAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -50,7 +47,8 @@ class HouseFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
         (activity as AppCompatActivity).title = "My House"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setHasOptionsMenu(true)
+
+
 
 
         houseViewModel = ViewModelProvider(this).get(HouseViewModel::class.java)
@@ -64,7 +62,7 @@ class HouseFragment : Fragment() {
 
             //house name and id
             binding.textViewHouseNameMyHouse.text = it.name.toString()
-            binding.textViewHouseIdMyHouse.text = "(#" + it.id.toString() + ")"
+            binding.textViewHouseIdMyHouse.text = it.id.toString()
         }
 
         houseViewModel.dataHouse()
@@ -116,9 +114,16 @@ class HouseFragment : Fragment() {
 
     private fun leaveHouse(){
         binding.buttonLeaveHouse.setOnClickListener {
-            houseViewModel.leaveHouse().observe(viewLifecycleOwner){
-                view?.findNavController()?.navigate(R.id.action_houseFragment_to_loadFragment)
-            }
+            MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setTitle("Do you confirm leaving the house?")
+                .setPositiveButton("Yes"){dialog, which ->
+                    houseViewModel.leaveHouse().observe(viewLifecycleOwner){
+                        view?.findNavController()?.navigate(R.id.action_houseFragment_to_loadFragment)
+                    }
+                }
+                .setNegativeButton("No"){dialog, which ->
+                }
+                .show()
         }
     }
 

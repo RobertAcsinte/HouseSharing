@@ -49,28 +49,33 @@ class KitchenRepository {
 
     fun fetchReservations(date: String): MutableLiveData<AppointmentResponse> {
         val mutableLiveData = MutableLiveData<AppointmentResponse>()
-        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                task.result.let { user ->
-                    kitchenRef.child(user.child("houseId").value.toString()).child(date).get().addOnCompleteListener { snapshot ->
+        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { taskHouseId ->
+            if (taskHouseId.isSuccessful) {
+                taskHouseId.result.let { user ->
+                    kitchenRef.child(user.child("houseId").value.toString()).child(date).get().addOnCompleteListener { taskAppointment ->
                         val response = AppointmentResponse()
-                        if(snapshot.isSuccessful){
-                            val result = snapshot.result
-                            result?.let { snapshot ->
-                                for(d: DataSnapshot in snapshot.children){
-                                    Log.d("RESERVATION", d.key.toString() + " - " + d.child("timeStartHour").value.toString())
-                                    var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
-                                        d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
-                                        d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
-                                        user.child("firstName").value.toString(), user.child("lastName").value.toString())
-                                    response.appointment!!.add(reservation)
+                        if(taskAppointment.isSuccessful){
+                            val result = taskAppointment.result
+                            result?.let { appointment ->
+                                accountRef.get().addOnCompleteListener { taskUserName ->
+                                    if(taskUserName.isSuccessful) {
+                                        taskUserName.result.let {
+                                            for(d: DataSnapshot in appointment.children){
+                                                var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
+                                                    d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
+                                                    d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
+                                                    it.child(d.child("userId").value.toString()).child("firstName").value.toString(), it.child(d.child("userId").value.toString()).child("lastName").value.toString())
+                                                response.appointment!!.add(reservation)
+                                            }
+                                            mutableLiveData.value = response
+                                        }
+                                    }
                                 }
                             }
                         }
                         else{
-                            response.exception = task.exception
+                            response.exception = taskHouseId.exception
                         }
-                        mutableLiveData.value = response
                     }
                 }
             }
@@ -80,29 +85,35 @@ class KitchenRepository {
 
     fun fetchReservationsToday(date: String, hour: Int): MutableLiveData<AppointmentResponse> {
         val mutableLiveData = MutableLiveData<AppointmentResponse>()
-        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                task.result.let { user ->
-                    kitchenRef.child(user.child("houseId").value.toString()).child(date).get().addOnCompleteListener { snapshot ->
+        accountRef.child(firebaseAuth.uid.toString()).get().addOnCompleteListener { taskHouseId ->
+            if (taskHouseId.isSuccessful) {
+                taskHouseId.result.let { user ->
+                    kitchenRef.child(user.child("houseId").value.toString()).child(date).get().addOnCompleteListener { taskAppointment ->
                         val response = AppointmentResponse()
-                        if(snapshot.isSuccessful){
-                            val result = snapshot.result
-                            result?.let { snapshot ->
-                                for(d: DataSnapshot in snapshot.children){
-                                    var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
-                                        d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
-                                        d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
-                                        user.child("firstName").value.toString(), user.child("lastName").value.toString())
-                                    if(reservation.timeStartHour!! >= hour){
-                                        response.appointment!!.add(reservation)
+                        if(taskAppointment.isSuccessful){
+                            val result = taskAppointment.result
+                            result?.let { appointment ->
+                                accountRef.get().addOnCompleteListener { taskUserName ->
+                                    if(taskUserName.isSuccessful) {
+                                        taskUserName.result.let {
+                                            for(d: DataSnapshot in appointment.children){
+                                                var reservation = Appointment(d.key!!.toInt(), d.child("timeStartHour").value.toString().toInt(),
+                                                    d.child("timeStartMinute").value.toString().toInt(), d.child("timeEndHour").value.toString().toInt(),
+                                                    d.child("timeEndMinute").value.toString().toInt(), d.child("userId").value.toString(),
+                                                    it.child(d.child("userId").value.toString()).child("firstName").value.toString(), it.child(d.child("userId").value.toString()).child("lastName").value.toString())
+                                                if(reservation.timeStartHour!! >= hour){
+                                                    response.appointment!!.add(reservation)
+                                                }
+                                            }
+                                            mutableLiveData.value = response
+                                        }
                                     }
                                 }
                             }
                         }
                         else{
-                            response.exception = task.exception
+                            response.exception = taskHouseId.exception
                         }
-                        mutableLiveData.value = response
                     }
                 }
             }

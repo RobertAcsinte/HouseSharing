@@ -46,7 +46,6 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarNotes)
         (activity as AppCompatActivity).title = "My Account"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setHasOptionsMenu(true)
 
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
